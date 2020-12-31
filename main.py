@@ -35,6 +35,9 @@ class TCPServer():
             if(data):
                 recieved = self.decoder(data)
                 print(recieved)
+                vars = self.decodeVars(recieved)
+                print(vars)
+                conn.send(self.mResponse(vars['record']))
             else:
                 break
 
@@ -55,6 +58,21 @@ class TCPServer():
         conn.close()
 
     def decodeVars(self, data):
+        codecid   = int(data[16:17], 16)
+        record    = int(data[18:20], 16)
+        timestamp = int(data[20:36], 16)
+        lon       = int(data[38:46], 16)
+        lat       = int(data[46:54], 16)
+        alt       = int(data[54:58], 16)
+
+        vars = {
+            "codec" : codecid,
+            "novars": record,
+            "timestamp": timestamp,
+            "gps":{"lon": lon, "lat": lat},
+            "alt": alt
+        }
+        return vars
 
 
     def decoder(self, raw):
@@ -65,10 +83,7 @@ class TCPServer():
         return datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
     def mResponse(self, data):
-        record = int(data[18:20], 16)
-        # resp = "0000" + str(record).zfill(4)
-        print("no data", record)
-        return record
+        return data.to_bytes(4, byteorder = 'big')
 
 
 
