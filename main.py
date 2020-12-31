@@ -29,8 +29,7 @@ class TCPServer():
     def Communicator(self, conn):
         print("handshaking")
         accept_con_mes = '\x01'
-        accept_con_mes.encode('utf-8')
-        conn.send(accept_con_mes)
+        conn.send(accept_con_mes.encode('utf-8'))
         while True:
             data = conn.recv(1024)
             recieved = binascii.hexlify(data)
