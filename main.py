@@ -11,8 +11,8 @@ import struct
 accepted = False
 
 class TCPServer():
-    def __init__(self):
-        self.port = 5001
+    def __init__(self, port):
+        self.port = port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.bind(('', self.port))
@@ -26,16 +26,28 @@ class TCPServer():
             thread.start()
             print(f"[ACTIVE CONNECTIONS] {threading.activeCount() - 1}")
 
-    def handle_client(self,conn, addr):
+    def Communicator(self, conn):
+        print("handshaking")
+        accept_con_mes = '\x01'
+        accept_con_mes.encode('utf-8')
+        conn.send(accept_con_mes)
+        while True:
+            data = conn.recv(1024)
+            recieved = binascii.hexlify(data)
+            print(recieved)
+
+
+    def handle_client(self, conn, addr):
         print(f"[NEW CONNECTION] {addr} connected.")
         connected = True
         while connected:
             print("waiting for device")
-            data = conn.recv(1024)
-            if(data):
-                print(data)
-                imei = binascii.hexlify(data)#.decode('utf-8')
-                print(imei)
+            imei_data = conn.recv(1024)
+            if(imei_data):
+                imei = imei_data.decode('utf-8')
+                self.Communicator(conn)
+            else:
+                break
         print("how ?")
         conn.close()
 
@@ -55,5 +67,6 @@ class TCPServer():
 
 
 if __name__ == '__main__':
-    data = TCPServer()
+    port = 5001
+    data = TCPServer(port)
     data.tcpServer()
