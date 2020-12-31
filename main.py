@@ -15,6 +15,7 @@ class TCPServer():
         self.port = port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         self.sock.bind(('', self.port))
 
     def tcpServer(self):
@@ -25,23 +26,32 @@ class TCPServer():
             thread.start()
             print(f"[ACTIVE CONNECTIONS] {threading.activeCount() - 1}")
 
-    def Communicator(self, conn):
+    def Communicator(self, conn, imei):
         print("handshaking")
         accept_con_mes = '\x01'
         conn.send(accept_con_mes.encode('utf-8'))
         print("handshake complete")
         while True:
-            data = conn.recv(1024)
-            if(data):
-                recieved = self.decoder(data)
-                # print(recieved)
-                vars = self.decodeVars(recieved)
-                print(vars)
-                conn.send(self.mResponse(vars['novars']))
-                led = "00000000000000160C01050000000E7365746469676f75742031203630010000B33E".encode('utf-8')
-                conn.send(led)
-                print("done")
-            else:
+            try:
+                data = conn.recv(1024)
+                if(data):
+                    recieved = self.decoder(data)
+                    # print(recieved)
+                    vars = self.decodeVars(recieved, imei)
+                    print(vars)
+                    resp = self.mResponse(vars['novars'])
+                    # print(resp)
+                    
+                    conn.send(resp)
+                    time.sleep(15)
+                    # led = "00000000000000160C01050000000E7365746469676f75742031203630010000B33E".encode('utf-8')
+                    # led = b'\x00\x00\x00\x00\x00\x00\x00\x16\x0c\x01\x05\x00\x00\x00\x0esetdigout 1 60\x01\x00\x00\xb3>'
+                    # conn.send(led)
+                    print("done")
+                else:
+                    break
+            except Exception as e:
+                print(e)
                 break
         print('exiting comms')
 
@@ -55,14 +65,15 @@ class TCPServer():
             if(imei_data):
                 imei = imei_data.decode('utf-8')
                 print(imei)
-                self.Communicator(conn)
+                self.Communicator(conn, imei)
             else:
                 break
         print("how ?")
         conn.close()
 
-    def decodeVars(self, data):
-        codecid   = int(data[16:17], 16)
+    def decodeVars(self, data, imei):
+        curr_time = self.getDateTime()
+        codecid   = int(data[16:18], 16)
         record    = int(data[18:20], 16)
         timestamp = int(data[20:36], 16)
         lon       = int(data[38:46], 16)
@@ -70,6 +81,8 @@ class TCPServer():
         alt       = int(data[54:58], 16)
 
         vars = {
+            "sys-time": curr_time,
+            "imei"  : imei,
             "codec" : codecid,
             "novars": record,
             "timestamp": timestamp,
