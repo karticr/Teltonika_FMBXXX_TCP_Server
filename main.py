@@ -20,7 +20,6 @@ class TCPServer():
     def tcpServer(self):
         self.sock.listen()
         while True:
-            print("here ?")
             conn, addr = self.sock.accept()
             thread = threading.Thread(target=self.handle_client, args=(conn, addr))
             thread.start()
@@ -30,10 +29,14 @@ class TCPServer():
         print("handshaking")
         accept_con_mes = '\x01'
         conn.send(accept_con_mes.encode('utf-8'))
+        print("handshake complete")
         while True:
             data = conn.recv(1024)
-            recieved = binascii.hexlify(data)
-            print(recieved)
+            if(data):
+                recieved = self.decoder(data)
+                print(recieved)
+            else:
+                break
 
 
     def handle_client(self, conn, addr):
@@ -44,11 +47,15 @@ class TCPServer():
             imei_data = conn.recv(1024)
             if(imei_data):
                 imei = imei_data.decode('utf-8')
+                print(imei)
                 self.Communicator(conn)
             else:
                 break
         print("how ?")
         conn.close()
+
+    def decodeVars(self, data):
+
 
     def decoder(self, raw):
         decoded = binascii.hexlify(raw)
