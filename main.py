@@ -38,6 +38,7 @@ class TCPServer():
                 vars = self.decodeVars(recieved)
                 print(vars)
                 conn.send(self.mResponse(vars['record']))
+                
             else:
                 break
 
