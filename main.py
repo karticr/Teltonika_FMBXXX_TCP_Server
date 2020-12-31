@@ -34,13 +34,16 @@ class TCPServer():
             data = conn.recv(1024)
             if(data):
                 recieved = self.decoder(data)
-                print(recieved)
+                # print(recieved)
                 vars = self.decodeVars(recieved)
                 print(vars)
-                conn.send(self.mResponse(vars['record']))
-                
+                conn.send(self.mResponse(vars['novars']))
+                led = "00000000000000160C01050000000E7365746469676f75742031203630010000B33E".encode('utf-8')
+                conn.send(led)
+                print("done")
             else:
                 break
+        print('exiting comms')
 
 
     def handle_client(self, conn, addr):
