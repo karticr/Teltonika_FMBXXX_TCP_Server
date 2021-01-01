@@ -29,7 +29,11 @@ class IODecoder():
             id  = int(N4s[i:i+2], 16)
             val = int(N4s[i+2: i+10], 16)
             temp[int(id)] = val
-        print("temp", temp)
+        return temp
+
+    def ioDecoderN8(self, N8s, N8_size):
+        temp = {}
+
         return temp
 
     def dataDecoder(self, n_data):
@@ -71,6 +75,17 @@ class IODecoder():
             print("breaking @ N4")
             return Ns_data
         
+        N8_start  = N4_end                                  # n8 start location
+        n_N8      = int(n_data[N8_start:N8_start+2], 16)    # number of n8's
+        N8s_size  = n_N8 * (2 + 16)                         # n8 size
+        N8_end    = N8_start + 2 + N8s_size                 # N8 end location
+        N8s       = n_data[N8_start+2: N8_end]              # n8 raw data
+        N8_data   = self.ioDecoderN8(N8s, N8s_size)         
+        Ns_data['n8'] = N8_data                             # final N4 converted
+
+
+
+        print("N8 size", n_N8)
 
         print(Ns_data)
 
