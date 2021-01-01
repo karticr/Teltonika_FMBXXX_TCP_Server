@@ -32,17 +32,38 @@ def avlDecode(data, total):
     N_Tot_id   = int(data[50:52], 16)
     n_N1       = int(data[52:54], 16)
 
+    print("event io")
+
+    print(eventIO_ID)
+    print(N_Tot_id)
+    print(n_N1)
+
+    print("-------------")
     N1s_size   = n_N1*2*2
     N1s        = data[54:54+N1s_size]
     print(N1s)
     # print("id", N1s[0:0+2])
+
+    dataall    = data[48:]
+    print(dataall)
+
+
+    N_vals    = {}
+    temp       = []
     for i in range(0, N1s_size, 4):
         id  = int(N1s[i:i+2], 16)
         val = int(N1s[i+2:i+4], 16)
-
+        temp.append({int(id):val})
         # print("id: {}, value: {}".format(id, val))
         print("id: {}, value: {}".format(avl.getAvlInfo(str(id))['name'], val))
         print("----------------")
+
+    N_vals['N1'] = temp
+    print(N_vals)
+
+    
+
+
 
     fin = {
         "time": time,
