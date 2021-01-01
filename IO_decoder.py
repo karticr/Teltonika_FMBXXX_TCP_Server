@@ -52,7 +52,11 @@ class IODecoder():
             print("breaking @ N2")
             return Ns_data
 
-        N3_start   = N2_end
+        print(Ns_data)
+        N4_start   = N2_end
+        n_N4       = int(n_data[N4_start:N4_start+2], 16)
+        N4s_size   = n_N4 * (2 + 8)
+        print("n n4",n_N4)
 
     def getNSData(self):
         return self.Ns_data
@@ -61,6 +65,7 @@ class IODecoder():
 
 if __name__ == '__main__':
     n_data = "0009080100020103000400b301b401320033000148011d0000"
+    n_data = "0105021503010101425E0F01F10000601A014E0000000000000000"
     # data = dataDecoder(n_data)
     # print(data)
 
