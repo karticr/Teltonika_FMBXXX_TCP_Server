@@ -85,33 +85,40 @@ def avlDecode(data, total):
 
 
 def decodeVars(data):
-    codecid   = int(data[16:18], 16)
-    record    = int(data[18:20], 16)
-    timestamp = int(data[20:36], 16)
-    lon       = int(data[38:46], 16)
-    lat       = int(data[46:54], 16)
-    alt       = int(data[54:58], 16)
+    codecid     = int(data[16:18], 16)
+    no_record_i = int(data[18:20], 16)      #first no of total records
+    no_record_e = int(data[-10:-8], 16)     #no of total records before crc-16 check
+    crc_16      = int(data[-8:],16)            #crc-16 check
+
+    print('tot records', no_record_i, no_record_e, "crc:", crc_16)
 
     entries =  data[20:-10]
-    print(entries)
+    # print(entries)
     print("------------")
     d_size   = len(entries)
-    division = int(len(entries)/ record)
+    division = int(len(entries)/ no_record_i)
 
     e_list = []
     for i in range(0, d_size, division):
         e_list.append(entries[i:i+division])
-    
-    for i in e_list:
-        print(i)
 
-    vars = {
-        "codec" : codecid,
-        "novars": record,
-        "timestamp": timestamp,
-        "gps":{"lon": lon, "lat": lat},
-        "alt": alt
-    }
+    print(e_list[0])
+    e_1 = e_list[0]                                 #AVL Complete packet
+
+    # for i in e_list:
+    #     print("dd", i)
+
+    timerrr = e_1[0:16]
+    tie     = int(timerrr, 16)
+    local   = unixtolocal(tie)
+
+    print("timer", timerrr)
+    print("unix", tie)
+    print("local", local)
+
+    print("-------------")
+    print("avl io", e_1[48:])                                # AVL IO packet 
+
 
     # print('len', int(data[20:], 16))
     # avlDecode(data[20:-10], record)
