@@ -43,7 +43,7 @@ class IODecoder():
                 val = int(N8s[i+10:i+18], 16)
                 temp[int(id)] = val
         return temp
-
+    
     def dataDecoder(self, n_data):
         Ns_data    = {}
         eventIO_ID = int(n_data[0:2], 16)
