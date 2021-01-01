@@ -1,30 +1,25 @@
 from avlMatcher import avlController
-n_data = "0009080100020103000400b301b401320033000148011d000000000176b9648c92002fbf4ac207c6bbed002000000400000009080100020103000400b300b40032003300014807d0000000000176b963a232002fbf4ac207c6bbed001d00000400000009080100020103000400b300b40032003300014807d0000000000176b962b7d5002fbf4ac207c6bbed001b00000400000009080100020103000400b300b40032003300014807d0000000000176b961cd75002fbf4ac207c6bbed001f00000500000009080100020103000400b300b40032003300014807d0000000000176b960e315002fbf4ac207c6bbed001e00000500000009080100020103000400b300b40032003300014807d0000000000176b95ff8b5002fbf4ac207c6bbed000000000000000009080100020103000400b300b40032003300014807d0000000000176b95f0e55002fbf4ac207c6bbed001900000400000009080100020103000400b300b40032003300014807d0000000000176b95e23f9002fbf4ac207c6bbed000000000000000009080100020103000400b300b40032003300014807d00000"
-n_data = "0009080100020103000400b301b401320033000148011d0000"
 avl = avlController()
 
 def ioDecoderN1(N1s, N1s_size):
     # print('n1s', N1s)
-    temp       = []
+    temp       = {}
     for i in range(0,  N1s_size, 4):
         id  = int(N1s[i:i+2], 16)
         val = int(N1s[i+2:i+4], 16)
-        temp.append({int(id):val})
+        temp[int(id)] = val
     return temp
-        # print("id: {}, value: {}".format(id, val))
-        # print("id: {}, value: {}".format(avl.getAvlInfo(str(id))['name'], val))
-        # print("----------------")
 
 def ioDecoderN2(N2s, N2_size):
     # print("n2s", N2s)
-    temp = []
+    temp = {}
     for i in range(0, N2_size, 6):
         id  = int(N2s[i:i+2], 16)
         val = int(N2s[i+2: i+2+4], 16)
-        temp.append({int(id):val})
+        temp[int(id)] = val
     return temp
 
-def dataDecoder(data):
+def dataDecoder(n_data):
     Ns_data    = {}
     eventIO_ID = int(n_data[0:2], 16)
     N_Tot_io   = int(n_data[2:4], 16)
@@ -57,4 +52,6 @@ def dataDecoder(data):
 
 
 if __name__ == '__main__':
-    dataDecoder(n_data)
+    n_data = "0009080100020103000400b301b401320033000148011d0000"
+    data = dataDecoder(n_data)
+    print(data)
