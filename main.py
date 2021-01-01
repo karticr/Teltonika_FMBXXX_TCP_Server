@@ -2,7 +2,6 @@ import socket
 import threading
 import binascii
 import asyncio
-from websocket import create_connection # websockets package
 import time
 import json
 import datetime
@@ -34,21 +33,26 @@ class TCPServer():
         while True:
             try:
                 data = conn.recv(1024)
+                print("broken? ")
                 if(data):
                     recieved = self.decoder(data)
+                    with open('raw.txt', 'a+') as w:
+                        w.writelines(recieved.decode('utf-8')+'\n')
                     # print(recieved)
                     vars = self.decodeVars(recieved, imei)
                     print(vars)
                     resp = self.mResponse(vars['novars'])
-                    # print(resp)
-                    
+                    time.sleep(60)
                     conn.send(resp)
-                    time.sleep(15)
+                    # conn.send(struct.pack("!L", vars['novars']))
+
+                    # time.sleep(15)
                     # led = "00000000000000160C01050000000E7365746469676f75742031203630010000B33E".encode('utf-8')
                     # led = b'\x00\x00\x00\x00\x00\x00\x00\x16\x0c\x01\x05\x00\x00\x00\x0esetdigout 1 60\x01\x00\x00\xb3>'
                     # conn.send(led)
                     print("done")
                 else:
+                    print("empty here ?")
                     break
             except Exception as e:
                 print(e)
@@ -61,15 +65,19 @@ class TCPServer():
         connected = True
         while connected:
             print("waiting for device")
-            imei_data = conn.recv(1024)
-            if(imei_data):
-                imei = imei_data.decode('utf-8')
-                print(imei)
-                self.Communicator(conn, imei)
-            else:
+            try:
+                imei_data = conn.recv(1024)
+                if(imei_data):
+                    imei = imei_data.decode('utf-8')
+                    print(imei)
+                    self.Communicator(conn, imei)
+                else:
+                    break
+            except Exception as e:
+                print(e)
+                print("how ?")
+                conn.close()
                 break
-        print("how ?")
-        conn.close()
 
     def decodeVars(self, data, imei):
         curr_time = self.getDateTime()
