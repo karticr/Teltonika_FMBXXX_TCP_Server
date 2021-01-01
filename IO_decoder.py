@@ -43,59 +43,64 @@ class IODecoder():
                 val = int(N8s[i+10:i+18], 16)
                 temp[int(id)] = val
         return temp
-    
+
     def dataDecoder(self, n_data):
-        Ns_data    = {}
-        eventIO_ID = int(n_data[0:2], 16)
-        N_Tot_io   = int(n_data[2:4], 16)
+        try:
+            Ns_data    = {}
+            eventIO_ID = int(n_data[0:2], 16)
+            N_Tot_io   = int(n_data[2:4], 16)
 
-        n_N1       = int(n_data[4:6], 16)                   # number of n1's
-        N1s_size   = n_N1 * (2 + 2)                         # n1 size
-        N1s        = n_data[6:6+N1s_size]                   # n1 raw data
-        N1_data    = self.ioDecoderN1(N1s, N1s_size)
-        Ns_data['n1'] = N1_data                             # final N1 converted
+            n_N1       = int(n_data[4:6], 16)                   # number of n1's
+            N1s_size   = n_N1 * (2 + 2)                         # n1 size
+            N1s        = n_data[6:6+N1s_size]                   # n1 raw data
+            N1_data    = self.ioDecoderN1(N1s, N1s_size)
+            Ns_data['n1'] = N1_data                             # final N1 converted
 
-        if(n_N1 == N_Tot_io):                               # N1 Break check
-            print("breaking @ N1")
-            return Ns_data
+            if(n_N1 == N_Tot_io):                               # N1 Break check
+                print("breaking @ N1")
+                return Ns_data
 
-        N2_start   = 6+N1s_size                             # n2 start location
-        n_N2       = int(n_data[N2_start:N2_start+2], 16)   # number of n2's
-        N2s_size   = n_N2 * (2 + 4)                         # n2 size
-        N2_end     = N2_start+2+N2s_size                    # n2 end location
-        N2s        = n_data[N2_start+2: N2_end]             # n2 raw data
-        N2_data    = self.ioDecoderN2(N2s, N2s_size)
-        Ns_data['n2'] = N2_data                             # final N2 converted
+            N2_start   = 6+N1s_size                             # n2 start location
+            n_N2       = int(n_data[N2_start:N2_start+2], 16)   # number of n2's
+            N2s_size   = n_N2 * (2 + 4)                         # n2 size
+            N2_end     = N2_start+2+N2s_size                    # n2 end location
+            N2s        = n_data[N2_start+2: N2_end]             # n2 raw data
+            N2_data    = self.ioDecoderN2(N2s, N2s_size)
+            Ns_data['n2'] = N2_data                             # final N2 converted
 
-        if(n_N1 + n_N2 == N_Tot_io):                        # N2 Break check
-            print("breaking @ N2")
-            return Ns_data
+            if(n_N1 + n_N2 == N_Tot_io):                        # N2 Break check
+                print("breaking @ N2")
+                return Ns_data
 
-        N4_start   = N2_end                                 # n4 start location
-        n_N4       = int(n_data[N4_start:N4_start+2], 16)   # number of n4's
-        N4s_size   = n_N4 * (2 + 8)                         # n4 size
-        N4_end     = N4_start + 2 + N4s_size                # n4 end location
-        N4s        = n_data[N4_start+2: N4_end]             # n4 raw data
-        N4_data    = self.ioDecoderN4(N4s, N4s_size)
-        Ns_data['n4'] = N4_data                             # final N4 converted
+            N4_start   = N2_end                                 # n4 start location
+            n_N4       = int(n_data[N4_start:N4_start+2], 16)   # number of n4's
+            N4s_size   = n_N4 * (2 + 8)                         # n4 size
+            N4_end     = N4_start + 2 + N4s_size                # n4 end location
+            N4s        = n_data[N4_start+2: N4_end]             # n4 raw data
+            N4_data    = self.ioDecoderN4(N4s, N4s_size)
+            Ns_data['n4'] = N4_data                             # final N4 converted
 
-        if(n_N1 + n_N2 + n_N4 == N_Tot_io):                 # N4 Break check
-            print("breaking @ N4")
-            return Ns_data
-        
-        N8_start  = N4_end                                  # n8 start location
-        n_N8      = int(n_data[N8_start:N8_start+2], 16)    # number of n8's
-        N8s_size  = n_N8 * (2 + 16)                         # n8 size
-        N8_end    = N8_start + 2 + N8s_size                 # N8 end location
-        N8s       = n_data[N8_start+2: N8_end]              # n8 raw data
-        N8_data   = self.ioDecoderN8(N8s, N8s_size)         
-        Ns_data['n8'] = N8_data                             # final N4 converted
-
-
+            if(n_N1 + n_N2 + n_N4 == N_Tot_io):                 # N4 Break check
+                print("breaking @ N4")
+                return Ns_data
+            
+            N8_start  = N4_end                                  # n8 start location
+            n_N8      = int(n_data[N8_start:N8_start+2], 16)    # number of n8's
+            N8s_size  = n_N8 * (2 + 16)                         # n8 size
+            N8_end    = N8_start + 2 + N8s_size                 # N8 end location
+            N8s       = n_data[N8_start+2: N8_end]              # n8 raw data
+            N8_data   = self.ioDecoderN8(N8s, N8s_size)         
+            Ns_data['n8'] = N8_data                             # final N4 converted
 
 
-        print("N8 size", N8s_size)
-        print(Ns_data)
+            if(n_N1 + n_N2 + n_N4 + n_N8 == N_Tot_io):          # N4 Break check
+                print("breaking @ N8")
+                return Ns_data
+            else:
+                return -1                                       # -1 error
+        except Exception as e:
+            print(e)
+            return -1
 
 
         
