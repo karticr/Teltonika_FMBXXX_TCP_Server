@@ -1,14 +1,1310 @@
 {
-    "1":{
-        "id":1,
-        "value":"digital_input_1"
+    "1": {
+        "id": 1,
+        "name": "Digital Input 1"
     },
-    "2":{
-        "id":2,
-        "value":"digital_input_2"
+    "2": {
+        "id": 2,
+        "name": "Digital Input 2"
     },
-    "3":{
-        "id":3,
-        "value":"digital_input_3"
+    "3": {
+        "id": 3,
+        "name": "Digital Input 3"
+    },
+    "4": {
+        "id": 4,
+        "name": "Pulse Counter Din1"
+    },
+    "5": {
+        "id": 5,
+        "name": "Pulse Counter Din2"
+    },
+    "6": {
+        "id": 6,
+        "name": "Analog Input 2"
+    },
+    "8": {
+        "id": 8,
+        "name": "Authorized iButton"
+    },
+    "9": {
+        "id": 9,
+        "name": "Analog Input 1"
+    },
+    "10": {
+        "id": 10,
+        "name": "SD Status"
+    },
+    "11": {
+        "id": 11,
+        "name": "ICCID1"
+    },
+    "12": {
+        "id": 12,
+        "name": "Fuel Used GPS"
+    },
+    "13": {
+        "id": 13,
+        "name": "Fuel Rate GPS"
+    },
+    "14": {
+        "id": 14,
+        "name": "ICCID2"
+    },
+    "15": {
+        "id": 15,
+        "name": "Eco Score"
+    },
+    "16": {
+        "id": 16,
+        "name": "Total Odometer"
+    },
+    "17": {
+        "id": 17,
+        "name": "Axis X"
+    },
+    "18": {
+        "id": 18,
+        "name": "Axis Y"
+    },
+    "19": {
+        "id": 19,
+        "name": "Axis Z"
+    },
+    "20": {
+        "id": 20,
+        "name": "BLE Battery #2"
+    },
+    "21": {
+        "id": 21,
+        "name": "GSM Signal"
+    },
+    "22": {
+        "id": 22,
+        "name": "BLE Battery #3"
+    },
+    "23": {
+        "id": 23,
+        "name": "BLE Battery #4"
+    },
+    "24": {
+        "id": 24,
+        "name": "Speed"
+    },
+    "25": {
+        "id": 25,
+        "name": "BLE Temperature #1"
+    },
+    "26": {
+        "id": 26,
+        "name": "BLE Temperature #2"
+    },
+    "27": {
+        "id": 27,
+        "name": "BLE Temperature #3"
+    },
+    "28": {
+        "id": 28,
+        "name": "BLE Temperature #4"
+    },
+    "29": {
+        "id": 29,
+        "name": "BLE Battery #1"
+    },
+    "30": {
+        "id": 30,
+        "name": "Number of DTC"
+    },
+    "31": {
+        "id": 31,
+        "name": "Engine Load"
+    },
+    "32": {
+        "id": 32,
+        "name": "Coolant Temperature"
+    },
+    "33": {
+        "id": 33,
+        "name": "Short Fuel Trim"
+    },
+    "34": {
+        "id": 34,
+        "name": "Fuel pressure"
+    },
+    "35": {
+        "id": 35,
+        "name": "Intake MAP"
+    },
+    "36": {
+        "id": 36,
+        "name": "Engine RPM"
+    },
+    "37": {
+        "id": 37,
+        "name": "Vehicle Speed"
+    },
+    "38": {
+        "id": 38,
+        "name": "Timing Advance"
+    },
+    "39": {
+        "id": 39,
+        "name": "Intake Air Temperature"
+    },
+    "40": {
+        "id": 40,
+        "name": "MAF"
+    },
+    "41": {
+        "id": 41,
+        "name": "Throttle Position"
+    },
+    "42": {
+        "id": 42,
+        "name": "Runtime since engine start"
+    },
+    "43": {
+        "id": 43,
+        "name": "Distance Traveled MIL On"
+    },
+    "44": {
+        "id": 44,
+        "name": "Relative Fuel Rail Pressure"
+    },
+    "45": {
+        "id": 45,
+        "name": "Direct Fuel Rail Pressure"
+    },
+    "46": {
+        "id": 46,
+        "name": "Commanded EGR"
+    },
+    "47": {
+        "id": 47,
+        "name": "EGR Error"
+    },
+    "48": {
+        "id": 48,
+        "name": "Fuel Level"
+    },
+    "49": {
+        "id": 49,
+        "name": "Distance Since Codes Clear"
+    },
+    "50": {
+        "id": 50,
+        "name": "Barometic Pressure"
+    },
+    "51": {
+        "id": 51,
+        "name": "Control Module Voltage"
+    },
+    "52": {
+        "id": 52,
+        "name": "Absolute Load Value"
+    },
+    "53": {
+        "id": 53,
+        "name": "Ambient Air Temperature"
+    },
+    "54": {
+        "id": 54,
+        "name": "Time Run With MIL On"
+    },
+    "55": {
+        "id": 55,
+        "name": "Time Since Codes Cleared"
+    },
+    "56": {
+        "id": 56,
+        "name": "Absolute Fuel Rail Pressure"
+    },
+    "57": {
+        "id": 57,
+        "name": "Hybrid battery pack life"
+    },
+    "58": {
+        "id": 58,
+        "name": "Engine Oil Temperature"
+    },
+    "59": {
+        "id": 59,
+        "name": "Fuel injection timing"
+    },
+    "60": {
+        "id": 60,
+        "name": "Fuel Rate"
+    },
+    "61": {
+        "id": 61,
+        "name": "Geofence zone 06"
+    },
+    "62": {
+        "id": 62,
+        "name": "Geofence zone 07"
+    },
+    "63": {
+        "id": 63,
+        "name": "Geofence zone 08"
+    },
+    "64": {
+        "id": 64,
+        "name": "Geofence zone 09"
+    },
+    "65": {
+        "id": 65,
+        "name": "Geofence zone 10"
+    },
+    "66": {
+        "id": 66,
+        "name": "External Voltage"
+    },
+    "67": {
+        "id": 67,
+        "name": "Battery Voltage"
+    },
+    "68": {
+        "id": 68,
+        "name": "Battery Current"
+    },
+    "69": {
+        "id": 69,
+        "name": "GNSS Status"
+    },
+    "70": {
+        "id": 70,
+        "name": "Geofence zone 11"
+    },
+    "71": {
+        "id": 71,
+        "name": "Dallas Temperature ID 4"
+    },
+    "72": {
+        "id": 72,
+        "name": "Dallas Temperature 1"
+    },
+    "73": {
+        "id": 73,
+        "name": "Dallas Temperature 2"
+    },
+    "74": {
+        "id": 74,
+        "name": "Dallas Temperature 3"
+    },
+    "75": {
+        "id": 75,
+        "name": "Dallas Temperature 4"
+    },
+    "76": {
+        "id": 76,
+        "name": "Dallas Temperature ID 1"
+    },
+    "77": {
+        "id": 77,
+        "name": "Dallas Temperature ID 2"
+    },
+    "78": {
+        "id": 78,
+        "name": "iButton"
+    },
+    "79": {
+        "id": 79,
+        "name": "Dallas Temperature ID 3"
+    },
+    "80": {
+        "id": 80,
+        "name": "Data Mode"
+    },
+    "81": {
+        "id": 81,
+        "name": "Vehicle Speed"
+    },
+    "82": {
+        "id": 82,
+        "name": "Accelerator Pedal Position"
+    },
+    "83": {
+        "id": 83,
+        "name": "Fuel Consumed"
+    },
+    "84": {
+        "id": 84,
+        "name": "Fuel level"
+    },
+    "85": {
+        "id": 85,
+        "name": "Engine RPM"
+    },
+    "86": {
+        "id": 86,
+        "name": "BLE Humidity #1"
+    },
+    "87": {
+        "id": 87,
+        "name": "Total Mileage"
+    },
+    "88": {
+        "id": 88,
+        "name": "Geofence zone 12"
+    },
+    "89": {
+        "id": 89,
+        "name": "Fuel level"
+    },
+    "90": {
+        "id": 90,
+        "name": "Door Status"
+    },
+    "91": {
+        "id": 91,
+        "name": "Geofence zone 13"
+    },
+    "92": {
+        "id": 92,
+        "name": "Geofence zone 14"
+    },
+    "93": {
+        "id": 93,
+        "name": "Geofence zone 15"
+    },
+    "94": {
+        "id": 94,
+        "name": "Geofence zone 16"
+    },
+    "95": {
+        "id": 95,
+        "name": "Geofence zone 17"
+    },
+    "96": {
+        "id": 96,
+        "name": "Geofence zone 18"
+    },
+    "97": {
+        "id": 97,
+        "name": "Geofence zone 19"
+    },
+    "98": {
+        "id": 98,
+        "name": "Geofence zone 20"
+    },
+    "99": {
+        "id": 99,
+        "name": "Geofence zone 21"
+    },
+    "100": {
+        "id": 100,
+        "name": "Program Number"
+    },
+    "101": {
+        "id": 101,
+        "name": "Module ID"
+    },
+    "102": {
+        "id": 102,
+        "name": "Engine Worktime"
+    },
+    "103": {
+        "id": 103,
+        "name": "Engine Worktime (counted)"
+    },
+    "104": {
+        "id": 104,
+        "name": "BLE Humidity #2"
+    },
+    "105": {
+        "id": 105,
+        "name": "Total Mileage (counted)"
+    },
+    "106": {
+        "id": 106,
+        "name": "BLE Humidity #3"
+    },
+    "107": {
+        "id": 107,
+        "name": "Fuel Consumed(counted)"
+    },
+    "108": {
+        "id": 108,
+        "name": "BLE Humidity #4"
+    },
+    "110": {
+        "id": 110,
+        "name": "Fuel Rate"
+    },
+    "111": {
+        "id": 111,
+        "name": "AdBlue Level"
+    },
+    "112": {
+        "id": 112,
+        "name": "AdBlue Level"
+    },
+    "113": {
+        "id": 113,
+        "name": "Battery Level"
+    },
+    "114": {
+        "id": 114,
+        "name": "Engine Load"
+    },
+    "115": {
+        "id": 115,
+        "name": "Engine Temperature"
+    },
+    "118": {
+        "id": 118,
+        "name": "Axle 1 Load"
+    },
+    "119": {
+        "id": 119,
+        "name": "Axle 2 Load"
+    },
+    "120": {
+        "id": 120,
+        "name": "Axle 3 Load"
+    },
+    "121": {
+        "id": 121,
+        "name": "Axle 4 Load"
+    },
+    "122": {
+        "id": 122,
+        "name": "Axle 5 Load"
+    },
+    "123": {
+        "id": 123,
+        "name": "Control State Flags"
+    },
+    "124": {
+        "id": 124,
+        "name": "Agricultural Machinery Flags"
+    },
+    "125": {
+        "id": 125,
+        "name": "Harvesting Time"
+    },
+    "126": {
+        "id": 126,
+        "name": "Area of Harvest"
+    },
+    "127": {
+        "id": 127,
+        "name": "LVC of Harvest"
+    },
+    "128": {
+        "id": 128,
+        "name": "Grain Mow Volume"
+    },
+    "129": {
+        "id": 129,
+        "name": "Grain Moisture"
+    },
+    "130": {
+        "id": 130,
+        "name": "Harvesting Drum RPM"
+    },
+    "131": {
+        "id": 131,
+        "name": "Gap Under Harvesting Drum"
+    },
+    "132": {
+        "id": 132,
+        "name": "Security State Flags"
+    },
+    "133": {
+        "id": 133,
+        "name": "Tacho Total Distance"
+    },
+    "134": {
+        "id": 134,
+        "name": "Trip Distance"
+    },
+    "135": {
+        "id": 135,
+        "name": "Tacho Vehicle Speed"
+    },
+    "136": {
+        "id": 136,
+        "name": "Tacho Driver Card Presence"
+    },
+    "137": {
+        "id": 137,
+        "name": "Driver 1 States"
+    },
+    "138": {
+        "id": 138,
+        "name": "Driver 2 States"
+    },
+    "139": {
+        "id": 139,
+        "name": "Driver 1 Driving Time"
+    },
+    "140": {
+        "id": 140,
+        "name": "Driver 2 Driving Time"
+    },
+    "141": {
+        "id": 141,
+        "name": "Driver 1 Break Time"
+    },
+    "142": {
+        "id": 142,
+        "name": "Driver 2 Break Time"
+    },
+    "143": {
+        "id": 143,
+        "name": "Driver 1 Activity Duration"
+    },
+    "144": {
+        "id": 144,
+        "name": "Driver 2 Activity Duration"
+    },
+    "145": {
+        "id": 145,
+        "name": "Driver 1 Driving Time"
+    },
+    "146": {
+        "id": 146,
+        "name": "Driver 2 Driving Time"
+    },
+    "147": {
+        "id": 147,
+        "name": "Driver 1 ID High"
+    },
+    "148": {
+        "id": 148,
+        "name": "Driver 1 ID Low"
+    },
+    "149": {
+        "id": 149,
+        "name": "Driver 2 ID High"
+    },
+    "150": {
+        "id": 150,
+        "name": "Driver 2 ID Low"
+    },
+    "151": {
+        "id": 151,
+        "name": "Battery Temperature"
+    },
+    "152": {
+        "id": 152,
+        "name": "Battery Level"
+    },
+    "153": {
+        "id": 153,
+        "name": "Geofence zone 22"
+    },
+    "154": {
+        "id": 154,
+        "name": "Geofence zone 23"
+    },
+    "155": {
+        "id": 155,
+        "name": "Geofence zone 01"
+    },
+    "156": {
+        "id": 156,
+        "name": "Geofence zone 02"
+    },
+    "157": {
+        "id": 157,
+        "name": "Geofence zone 03"
+    },
+    "158": {
+        "id": 158,
+        "name": "Geofence zone 04"
+    },
+    "159": {
+        "id": 159,
+        "name": "Geofence zone 05"
+    },
+    "160": {
+        "id": 160,
+        "name": "DTC Faults Count"
+    },
+    "161": {
+        "id": 161,
+        "name": "Slope of Arm"
+    },
+    "162": {
+        "id": 162,
+        "name": "Rotation of Arm"
+    },
+    "163": {
+        "id": 163,
+        "name": "Eject of Arm"
+    },
+    "164": {
+        "id": 164,
+        "name": "Horizontal Distance Arm"
+    },
+    "165": {
+        "id": 165,
+        "name": "Height Arm Above Ground"
+    },
+    "166": {
+        "id": 166,
+        "name": "Drill RPM"
+    },
+    "167": {
+        "id": 167,
+        "name": "Spread Salt"
+    },
+    "168": {
+        "id": 168,
+        "name": "Battery Voltage"
+    },
+    "169": {
+        "id": 169,
+        "name": "Spread Fine Grained Salt"
+    },
+    "170": {
+        "id": 170,
+        "name": "Coarse Grained Salt"
+    },
+    "171": {
+        "id": 171,
+        "name": "Spread DiMix"
+    },
+    "172": {
+        "id": 172,
+        "name": "Spread Coarse Grained Calcium"
+    },
+    "173": {
+        "id": 173,
+        "name": "Spread Calcium Chloride"
+    },
+    "174": {
+        "id": 174,
+        "name": "Spread Sodium Chloride"
+    },
+    "175": {
+        "id": 175,
+        "name": "Auto Geofence"
+    },
+    "176": {
+        "id": 176,
+        "name": "Spread Magnesium Chloride"
+    },
+    "177": {
+        "id": 177,
+        "name": "Amount Of Spread Gravel"
+    },
+    "178": {
+        "id": 178,
+        "name": "Amount Of Spread Sand"
+    },
+    "179": {
+        "id": 179,
+        "name": "Digital Output 1"
+    },
+    "180": {
+        "id": 180,
+        "name": "Digital Output 2"
+    },
+    "181": {
+        "id": 181,
+        "name": "GNSS PDOP"
+    },
+    "182": {
+        "id": 182,
+        "name": "GNSS HDOP"
+    },
+    "183": {
+        "id": 183,
+        "name": "Width Pouring Left"
+    },
+    "184": {
+        "id": 184,
+        "name": "Width Pouring Right"
+    },
+    "185": {
+        "id": 185,
+        "name": "Salt Spreader Working Hours"
+    },
+    "186": {
+        "id": 186,
+        "name": "Distance During Salting"
+    },
+    "187": {
+        "id": 187,
+        "name": "Load Weight"
+    },
+    "188": {
+        "id": 188,
+        "name": "Retarder Load"
+    },
+    "189": {
+        "id": 189,
+        "name": "Cruise Time"
+    },
+    "190": {
+        "id": 190,
+        "name": "Geofence zone 24"
+    },
+    "191": {
+        "id": 191,
+        "name": "Geofence zone 25"
+    },
+    "192": {
+        "id": 192,
+        "name": "Geofence zone 26"
+    },
+    "193": {
+        "id": 193,
+        "name": "Geofence zone 27"
+    },
+    "194": {
+        "id": 194,
+        "name": "Geofence zone 28"
+    },
+    "195": {
+        "id": 195,
+        "name": "Geofence zone 29"
+    },
+    "196": {
+        "id": 196,
+        "name": "Geofence zone 30"
+    },
+    "197": {
+        "id": 197,
+        "name": "Geofence zone 31"
+    },
+    "198": {
+        "id": 198,
+        "name": "Geofence zone 32"
+    },
+    "199": {
+        "id": 199,
+        "name": "Trip Odometer"
+    },
+    "200": {
+        "id": 200,
+        "name": "Sleep Mode"
+    },
+    "201": {
+        "id": 201,
+        "name": "LLS 1 Fuel Level"
+    },
+    "202": {
+        "id": 202,
+        "name": "LLS 1 Temperature"
+    },
+    "203": {
+        "id": 203,
+        "name": "LLS 2 Fuel Level"
+    },
+    "204": {
+        "id": 204,
+        "name": "LLS 2 Temperature"
+    },
+    "205": {
+        "id": 205,
+        "name": "GSM Cell ID"
+    },
+    "206": {
+        "id": 206,
+        "name": "GSM Area Code"
+    },
+    "207": {
+        "id": 207,
+        "name": "RFID"
+    },
+    "208": {
+        "id": 208,
+        "name": "Geofence zone 33"
+    },
+    "209": {
+        "id": 209,
+        "name": "Geofence zone 34"
+    },
+    "210": {
+        "id": 210,
+        "name": "LLS 3 Fuel Level"
+    },
+    "211": {
+        "id": 211,
+        "name": "LLS 3 Temperature"
+    },
+    "212": {
+        "id": 212,
+        "name": "LLS 4 Fuel Level"
+    },
+    "213": {
+        "id": 213,
+        "name": "LLS 4 Temperature"
+    },
+    "214": {
+        "id": 214,
+        "name": "LLS 5 Fuel Level"
+    },
+    "215": {
+        "id": 215,
+        "name": "LLS 5 Temperature"
+    },
+    "216": {
+        "id": 216,
+        "name": "Geofence zone 35"
+    },
+    "217": {
+        "id": 217,
+        "name": "Geofence zone 36"
+    },
+    "218": {
+        "id": 218,
+        "name": "Geofence zone 37"
+    },
+    "219": {
+        "id": 219,
+        "name": "Geofence zone 38"
+    },
+    "220": {
+        "id": 220,
+        "name": "Geofence zone 39"
+    },
+    "221": {
+        "id": 221,
+        "name": "Geofence zone 40"
+    },
+    "222": {
+        "id": 222,
+        "name": "Geofence zone 41"
+    },
+    "223": {
+        "id": 223,
+        "name": "Geofence zone 42"
+    },
+    "224": {
+        "id": 224,
+        "name": "Geofence zone 43"
+    },
+    "225": {
+        "id": 225,
+        "name": "Geofence zone 44"
+    },
+    "226": {
+        "id": 226,
+        "name": "Geofence zone 45"
+    },
+    "227": {
+        "id": 227,
+        "name": "Geofence zone 46"
+    },
+    "228": {
+        "id": 228,
+        "name": "Geofence zone 47"
+    },
+    "229": {
+        "id": 229,
+        "name": "Geofence zone 48"
+    },
+    "230": {
+        "id": 230,
+        "name": "Geofence zone 49"
+    },
+    "231": {
+        "id": 231,
+        "name": "Geofence zone 50"
+    },
+    "232": {
+        "id": 232,
+        "name": "CNG status"
+    },
+    "233": {
+        "id": 233,
+        "name": "CNG used"
+    },
+    "234": {
+        "id": 234,
+        "name": "CNG level"
+    },
+    "235": {
+        "id": 235,
+        "name": "Engine Oil Level"
+    },
+    "236": {
+        "id": 236,
+        "name": "Alarm"
+    },
+    "237": {
+        "id": 237,
+        "name": "Network Type"
+    },
+    "238": {
+        "id": 238,
+        "name": "User ID"
+    },
+    "239": {
+        "id": 239,
+        "name": "Ignition"
+    },
+    "240": {
+        "id": 240,
+        "name": "Movement"
+    },
+    "241": {
+        "id": 241,
+        "name": "Active GSM Operator"
+    },
+    "243": {
+        "id": 243,
+        "name": "Green driving event duration"
+    },
+    "244": {
+        "id": 244,
+        "name": "DIN2/AIN2 spec event"
+    },
+    "246": {
+        "id": 246,
+        "name": "Towing"
+    },
+    "247": {
+        "id": 247,
+        "name": "Crash detection"
+    },
+    "248": {
+        "id": 248,
+        "name": "Immobilizer"
+    },
+    "249": {
+        "id": 249,
+        "name": "Jamming"
+    },
+    "250": {
+        "id": 250,
+        "name": "Trip"
+    },
+    "251": {
+        "id": 251,
+        "name": "Idling"
+    },
+    "252": {
+        "id": 252,
+        "name": "Unplug"
+    },
+    "253": {
+        "id": 253,
+        "name": "Green driving type"
+    },
+    "254": {
+        "id": 254,
+        "name": "Green Driving Value"
+    },
+    "255": {
+        "id": 255,
+        "name": "Over Speeding"
+    },
+    "256": {
+        "id": 256,
+        "name": "VIN"
+    },
+    "257": {
+        "id": 257,
+        "name": "Crash trace data"
+    },
+    "258": {
+        "id": 258,
+        "name": "EcoMaximum"
+    },
+    "259": {
+        "id": 259,
+        "name": "EcoAverage"
+    },
+    "260": {
+        "id": 260,
+        "name": "EcoDuration"
+    },
+    "263": {
+        "id": 263,
+        "name": "BT Status"
+    },
+    "264": {
+        "id": 264,
+        "name": "Barcode ID"
+    },
+    "269": {
+        "id": 269,
+        "name": "Escort LLS Temperature #1"
+    },
+    "270": {
+        "id": 270,
+        "name": "Escort LLS Fuel level #1"
+    },
+    "271": {
+        "id": 271,
+        "name": "Escort LLS Battery Voltage #1"
+    },
+    "272": {
+        "id": 272,
+        "name": "Escort LLS Temperature #2"
+    },
+    "273": {
+        "id": 273,
+        "name": "Escort LLS Fuel level #2"
+    },
+    "274": {
+        "id": 274,
+        "name": "Escort LLS Battery Voltage #2"
+    },
+    "275": {
+        "id": 275,
+        "name": "Escort LLS Temperature #3"
+    },
+    "276": {
+        "id": 276,
+        "name": "BLE Fuel Level #3"
+    },
+    "277": {
+        "id": 277,
+        "name": "Escort LLS Battery Voltage #3"
+    },
+    "278": {
+        "id": 278,
+        "name": "Escort LLS Temperature #4"
+    },
+    "279": {
+        "id": 279,
+        "name": "BLE Fuel Level #4"
+    },
+    "280": {
+        "id": 280,
+        "name": "Escort LLS Battery Voltage #4"
+    },
+    "281": {
+        "id": 281,
+        "name": "Fault Codes"
+    },
+    "282": {
+        "id": 282,
+        "name": "DTC Faults code"
+    },
+    "283": {
+        "id": 283,
+        "name": "Driving State"
+    },
+    "284": {
+        "id": 284,
+        "name": "Driving Records"
+    },
+    "285": {
+        "id": 285,
+        "name": "Blood alcohol content"
+    },
+    "303": {
+        "id": 303,
+        "name": "Instant Movement"
+    },
+    "304": {
+        "id": 304,
+        "name": "Vehicle Range on Battery"
+    },
+    "306": {
+        "id": 306,
+        "name": "BLE Fuel Frequency #1"
+    },
+    "307": {
+        "id": 307,
+        "name": "BLE Fuel Frequency #2"
+    },
+    "308": {
+        "id": 308,
+        "name": "BLE Fuel Frequency #3"
+    },
+    "309": {
+        "id": 309,
+        "name": "BLE Fuel Frequency #4"
+    },
+    "317": {
+        "id": 317,
+        "name": "Crash event counter"
+    },
+    "327": {
+        "id": 327,
+        "name": "UL202-02 Sensor Fuel level"
+    },
+    "330": {
+        "id": 330,
+        "name": "Trip trace event"
+    },
+    "331": {
+        "id": 331,
+        "name": "BLE 1 Custom #1"
+    },
+    "332": {
+        "id": 332,
+        "name": "BLE 2 Custom #1"
+    },
+    "333": {
+        "id": 333,
+        "name": "BLE 3 Custom #1"
+    },
+    "334": {
+        "id": 334,
+        "name": "BLE 4 Custom #1"
+    },
+    "335": {
+        "id": 335,
+        "name": "BLE Luminosity #1"
+    },
+    "336": {
+        "id": 336,
+        "name": "BLE Luminosity #2"
+    },
+    "337": {
+        "id": 337,
+        "name": "BLE Luminosity #3"
+    },
+    "338": {
+        "id": 338,
+        "name": "BLE Luminosity #4"
+    },
+    "380": {
+        "id": 380,
+        "name": "Digital output 3"
+    },
+    "381": {
+        "id": 381,
+        "name": "Ground Sense"
+    },
+    "385": {
+        "id": 385,
+        "name": "Beacon"
+    },
+    "387": {
+        "id": 387,
+        "name": "ISO6709  Coordinates"
+    },
+    "389": {
+        "id": 389,
+        "name": "OBD OEM Total Mileage"
+    },
+    "390": {
+        "id": 390,
+        "name": "OBD OEM Fuel Level"
+    },
+    "391": {
+        "id": 391,
+        "name": "Private mode"
+    },
+    "403": {
+        "id": 403,
+        "name": "Driver Name"
+    },
+    "404": {
+        "id": 404,
+        "name": "Driver card license type"
+    },
+    "405": {
+        "id": 405,
+        "name": "Driver Gender"
+    },
+    "406": {
+        "id": 406,
+        "name": "Driver Card ID"
+    },
+    "407": {
+        "id": 407,
+        "name": "Driver Card Issue Year"
+    },
+    "408": {
+        "id": 408,
+        "name": "Driver Card Issue Year"
+    },
+    "409": {
+        "id": 409,
+        "name": "Driver Status Event"
+    },
+    "463": {
+        "id": 463,
+        "name": "BLE 1 Custom #2"
+    },
+    "464": {
+        "id": 464,
+        "name": "BLE 1 Custom #3"
+    },
+    "465": {
+        "id": 465,
+        "name": "BLE 1 Custom #4"
+    },
+    "466": {
+        "id": 466,
+        "name": "BLE 1 Custom #5"
+    },
+    "467": {
+        "id": 467,
+        "name": "BLE 2 Custom #2"
+    },
+    "468": {
+        "id": 468,
+        "name": "BLE 2 Custom #3"
+    },
+    "469": {
+        "id": 469,
+        "name": "BLE 2 Custom #4"
+    },
+    "470": {
+        "id": 470,
+        "name": "BLE 2 Custom #5"
+    },
+    "471": {
+        "id": 471,
+        "name": "BLE 3 Custom #2"
+    },
+    "472": {
+        "id": 472,
+        "name": "BLE 3 Custom #3"
+    },
+    "473": {
+        "id": 473,
+        "name": "BLE 3 Custom #4"
+    },
+    "474": {
+        "id": 474,
+        "name": "BLE 3 Custom #5"
+    },
+    "475": {
+        "id": 475,
+        "name": "BLE 4 Custom #2"
+    },
+    "476": {
+        "id": 476,
+        "name": "BLE 4 Custom #3"
+    },
+    "477": {
+        "id": 477,
+        "name": "BLE 4 Custom #4"
+    },
+    "478": {
+        "id": 478,
+        "name": "BLE 4 Custom #5"
+    },
+    "483": {
+        "id": 483,
+        "name": "UL202-02 Sensor Status"
+    },
+    "517": {
+        "id": 517,
+        "name": "SecurityStateFlags_P4"
+    },
+    "518": {
+        "id": 518,
+        "name": "ControlStateFlags_P4"
+    },
+    "519": {
+        "id": 519,
+        "name": "IndicatorStateFlags_P4"
+    },
+    "520": {
+        "id": 520,
+        "name": "AgriculturalStateFlags_P4"
+    },
+    "521": {
+        "id": 521,
+        "name": "UtilityStateFlags_P4"
+    },
+    "522": {
+        "id": 522,
+        "name": "CisternStateFlags_P4"
     }
 }
