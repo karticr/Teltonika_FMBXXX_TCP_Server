@@ -48,22 +48,6 @@ def avlDecode(data, total):
     print(dataall)
 
 
-    N_vals    = {}
-    temp       = []
-    for i in range(0, N1s_size, 4):
-        id  = int(N1s[i:i+2], 16)
-        val = int(N1s[i+2:i+4], 16)
-        temp.append({int(id):val})
-        # print("id: {}, value: {}".format(id, val))
-        print("id: {}, value: {}".format(avl.getAvlInfo(str(id))['name'], val))
-        print("----------------")
-
-    N_vals['N1'] = temp
-    print(N_vals)
-
-    
-
-
 
     fin = {
         "time": time,
@@ -108,6 +92,19 @@ def decodeVars(data):
     lat       = int(data[46:54], 16)
     alt       = int(data[54:58], 16)
 
+    entries =  data[20:-10]
+    print(entries)
+    print("------------")
+    d_size   = len(entries)
+    division = int(len(entries)/ record)
+
+    e_list = []
+    for i in range(0, d_size, division):
+        e_list.append(entries[i:i+division])
+    
+    for i in e_list:
+        print(i)
+
     vars = {
         "codec" : codecid,
         "novars": record,
@@ -117,7 +114,7 @@ def decodeVars(data):
     }
 
     # print('len', int(data[20:], 16))
-    avlDecode(data[20:-10], record)
+    # avlDecode(data[20:-10], record)
     # print("records", record)
     # print(int(data[-10:-8], 16))
     # return vars
