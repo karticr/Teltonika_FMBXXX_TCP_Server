@@ -1,0 +1,14 @@
+{
+    "1":{
+        "id":1,
+        "value":"digital_input_1"
+    },
+    "2":{
+        "id":2,
+        "value":"digital_input_2"
+    },
+    "3":{
+        "id":3,
+        "value":"digital_input_3"
+    }
+}
