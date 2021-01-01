@@ -20,5 +20,5 @@ class avlController:
 if __name__ == "__main__":
     data = avlController()
     # print(data.avl_data)
-    print(data.getAvlInfo("4"))
+    print(data.getAvlInfo("4")['name'])
     print(data.getAvlInfo("1"))
