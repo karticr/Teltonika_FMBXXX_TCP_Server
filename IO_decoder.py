@@ -33,7 +33,15 @@ class IODecoder():
 
     def ioDecoderN8(self, N8s, N8_size):
         temp = {}
-
+        for i in range(0, N8_size,10):
+            if(i == 0):
+                id  = int(N8s[i:i+2], 16)
+                val = int(N8s[i+2:i+18], 16)
+                temp[int(id)] = val
+            elif(i>18):
+                id  = int(N8s[i+8:i+10], 16)
+                val = int(N8s[i+10:i+18], 16)
+                temp[int(id)] = val
         return temp
 
     def dataDecoder(self, n_data):
@@ -85,8 +93,8 @@ class IODecoder():
 
 
 
-        print("N8 size", n_N8)
 
+        print("N8 size", N8s_size)
         print(Ns_data)
 
 
