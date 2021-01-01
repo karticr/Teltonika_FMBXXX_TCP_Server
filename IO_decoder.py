@@ -15,7 +15,7 @@ def ioDecoderN1(N1s, N1s_size):
         # print("----------------")
 
 def ioDecoderN2(N2s, N2_size):
-    print(N2s)
+    print("n2s", N2s)
     temp = []
     for i in range(0, N2_size, 6):
         id  = int(N2s[i:i+2], 16)
@@ -42,9 +42,10 @@ if __name__ == '__main__':
     N2_start   = 6+N1s_size                             # n2 start location
     n_N2       = int(n_data[N2_start:N2_start+2], 16)   # number of n2's
     N2s_size   = n_N2 * (2 + 4)                         # n2 size
-    N2s        = n_data[N2_start+2: N2_start+2+N2s_size]
-
+    N2_end     = N2_start+2+N2s_size                    # n2 end location
+    N2s        = n_data[N2_start+2: N2_end]
+    
     N2_data    = ioDecoderN2(N2s, N2s_size)
     print("N2", N2_data)
 
-    
+    N3_start   = N2_end
