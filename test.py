@@ -3,8 +3,12 @@ data = b'00000000000001bc080900000176bce01da0002fbf481707c6c03a001000990f0000000
 import binascii
 from binascii import unhexlify
 import datetime
+import json
 
 
+from avlMatcher import avlController
+
+avl = avlController()
 
 def unixtolocal(unix_time):
     time = datetime.datetime.fromtimestamp(unix_time/1000)
@@ -36,7 +40,8 @@ def avlDecode(data, total):
         id  = int(N1s[i:i+2], 16)
         val = int(N1s[i+2:i+4], 16)
 
-        print("id: {}, value: {}".format(id, val))
+        # print("id: {}, value: {}".format(id, val))
+        print("id: {}, value: {}".format(avl.getAvlInfo(str(id))['name'], val))
         print("----------------")
 
     fin = {
