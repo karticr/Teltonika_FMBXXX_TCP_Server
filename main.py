@@ -45,14 +45,8 @@ class TCPServer():
                     time.sleep(60)
                     conn.send(resp)
                     # conn.send(struct.pack("!L", vars['novars']))
-
-                    # time.sleep(15)
-                    # led = "00000000000000160C01050000000E7365746469676f75742031203630010000B33E".encode('utf-8')
-                    # led = b'\x00\x00\x00\x00\x00\x00\x00\x16\x0c\x01\x05\x00\x00\x00\x0esetdigout 1 60\x01\x00\x00\xb3>'
-                    # conn.send(led)
                     print("done")
                 else:
-                    print("empty here ?")
                     break
             except Exception as e:
                 print(e)
