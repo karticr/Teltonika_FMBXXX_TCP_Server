@@ -62,14 +62,16 @@ class avlDecoder():
         else:
             return -1
 
+    def getDateTime(self):                                                         # system time
+        return datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-
-    def unixtoLocal(self, unix_time):
+    def unixtoLocal(self, unix_time):                                              # unix to local time
         time = datetime.datetime.fromtimestamp(unix_time/1000)
         return f"{time:%Y-%m-%d %H:%M:%S}"
         
     def getAvlData(self):
         data = {
+            "sys_time"   : self.getDateTime(),
             "codecid"    : self.codecid,
             "no_record_i": self.no_record_i,
             "no_record_e": self.no_record_e,
