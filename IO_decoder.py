@@ -1,7 +1,7 @@
 class IODecoder():
-    def __init__(self, data):
-        self.IO_data = data
-        self.Ns_data = self.dataDecoder(self.IO_data)
+    def __init__(self):
+        self.IO_data = ""
+        self.Ns_data = {}
 
     def ioDecoderN1(self, N1s, N1s_size):
         # print('n1s', N1s)
@@ -115,5 +115,6 @@ if __name__ == '__main__':
     # data = dataDecoder(n_data)
     # print(data)
 
-    d = IODecoder(n_data)
-    print(d.getNSData())
+    d = IODecoder()
+    print(d.dataDecoder(n_data))
+    # print(d.getNSData())
