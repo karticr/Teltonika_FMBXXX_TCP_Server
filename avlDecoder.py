@@ -60,7 +60,7 @@ class avlDecoder():
             self.speed        = int(data[44:48], 16)                               # speed
         
             self.avl_io_raw   = self.avl_latest[48:]                               # avl io data raw
-            self.decoded_io   = IODecoder(self.avl_io_raw)                         # decoded avl data
+            self.decoded_io   = io.dataDecoder(self.avl_io_raw)                    # decoded avl data
             
         else:
             return -1
