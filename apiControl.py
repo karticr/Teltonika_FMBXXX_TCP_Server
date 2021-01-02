@@ -5,7 +5,8 @@ class postRequest():
         pass
 
     def post(self, url, data):
-        return
+        res = requests.post(url, data=data)
+        return res
 
 
 
@@ -14,7 +15,7 @@ if __name__ == "__main__":
             "deviceId": "fmb_640_1",
             "nmea": {
                 "lat": "13.0465650",
-                "long": "801064433"
+                "long": "80.1064433"
             },
             "inputs":{
                 "temp1": 20,
@@ -27,4 +28,6 @@ if __name__ == "__main__":
                 "buzzer":0
             }
         }
-    a = postRequest()
+    a   = postRequest()
+    url = "https://api.skymarinealert.co.uk/boats/endpoint"
+    print(a.post(url, data))
