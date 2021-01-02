@@ -8,7 +8,7 @@ class avlDecoder():
         self.raw_data = ""
         self.initVars()
 
-    def initVars(self):
+    def initVars(self):            #initilizing variables
         self.codecid        = 0
         self.no_records_i   = 0
         self.no_records_e   = 0
@@ -37,12 +37,12 @@ class avlDecoder():
     
 
         if(self.codecid == 8 and (self.no_record_i == self.no_record_e)):
-            record_entries   = data[20:-10]
-            entries_size     = len(record_entries)
-            division_size    = int(len(record_entries)/ self.no_record_i)
+            record_entries   = data[20:-10]                                        # entry data
+            entries_size     = len(record_entries)                                 # total no of entries
+            division_size    = int(len(record_entries)/ self.no_record_i)          # division size
             self.avl_entries = []
-            for i in range(0, entries_size, division_size):
-                self.avl_entries.append(record_entries[i:i+division_size])
+            for i in range(0, entries_size, division_size): 
+                self.avl_entries.append(record_entries[i:i+division_size])         # splitting into chunks
 
             self.avl_latest   = self.avl_entries[0]                                # latest avl data packets
             self.d_time_unix  = int(self.avl_latest[0:16],16)                      # device time unix
