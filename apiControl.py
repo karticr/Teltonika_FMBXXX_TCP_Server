@@ -33,8 +33,8 @@ class postRequest():
                 "pir"     : int(io['Digital Input 2'])
             },
             "outputs":{
-                "led":int(io['Digital Output 1']),
-                "buzzer":0
+                "led"   :int(io['Digital Output 2']),
+                "buzzer":int(io['Digital Output 1'])
             }
         }
         return format
