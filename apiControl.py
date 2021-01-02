@@ -84,27 +84,6 @@ if __name__ == "__main__":
     # print(data)
     a       = postRequest()
     ready   = a.avlToPostData(data)
-
-
     print(ready)
-
-    # ready = {
-    #         "deviceId": "352093081429150",
-    #         "nmea": {
-    #             "lat": "13.0465650",
-    #             "long": "80.1064433"
-    #         },
-    #         "inputs":{
-    #             "temp1": 20,
-    #             "speed": 30,
-    #             "angle": 40,
-    #             "altitude": 50,
-    #             "pir":1
-    #         },
-    #         "outputs":{
-    #             "led":1,
-    #             "buzzer":0
-    #         }
-    #     }
     url = "https://api.skymarinealert.co.uk/boats/endpoint"
     print(a.postToServer(ready))
