@@ -1,11 +1,7 @@
 import binascii
 import datetime
 
-from avlMatcher import avlIdMatcher
 from IO_decoder import IODecoder
-
-
-avl = avlIdMatcher()
 io  = IODecoder()
 class avlDecoder():
     def __init__(self):
