@@ -48,13 +48,13 @@ class avlDecoder():
             print(self.avl_latest)
             self.d_time_unix  = int(self.avl_latest[0:16],16)                      # device time unix
             self.d_time_local = self.unixtoLocal(self.d_time_unix)                 # device time local
-            self.priority     = int(data[16:18], 16)                               # device data priority
-            self.lon          = int(data[18:26], 16)                               # longitude
-            self.lat          = int(data[26:34], 16)                               # latitude
-            self.alt          = int(data[34:38], 16)                               # altitude
-            self.angle        = int(data[38:42], 16)                               # angle
-            self.satellites   = int(data[42:44], 16)                               # no of satellites
-            self.speed        = int(data[44:48], 16)                               # speed
+            self.priority     = int(record_entries[16:18], 16)                               # device data priority
+            self.lon          = int(record_entries[18:26], 16)                               # longitude
+            self.lat          = int(record_entries[26:34], 16)                               # latitude
+            self.alt          = int(record_entries[34:38], 16)                               # altitude
+            self.angle        = int(record_entries[38:42], 16)                               # angle
+            self.satellites   = int(record_entries[42:44], 16)                               # no of satellites
+            self.speed        = int(record_entries[44:48], 16)                               # speed
         
             self.avl_io_raw   = self.avl_latest[48:]                               # avl io data raw
             self.decoded_io   = io.dataDecoder(self.avl_io_raw)                    # decoded avl data
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     data = b'00000000000001bc080900000176c1d407e2022fbf452907c6befd001f00001000000209080100020103000400b300b400320033000148011d000000000176c1d3fca4022fbf452907c6befd001f00001000000209080100020003000400b300b400320033000148011d000000000176c152faca022fbf491107c6c260002c00170900000209080100020103000400b300b4003200330001480119000000000176c152f04f022fbf491107c6c260002c00170800000209080100020003000400b300b4003200330001480119000000000176c152ec40022fbf491107c6c260002c00170800000209080100020103000400b300b4003200330001480119000000000176c152dfc1022fbf491107c6c260002c00170800000209080100020003000400b300b4003200330001480119000000000176c152a6b7022fbf491107c6c260002c00170800000209080100020103000400b300b4003200330001480119000000000176c1528869022fbf491107c6c260002c00170800000209080100020003000400b300b4003200330001480119000000000176c1528253022fbf491107c6c260002c00170800000209080100020103000400b300b40032003300014801190000090000a013'
     avl = avlDecoder()
     res = avl.decodeAVL(data)
-    # print(res)
+    print(res)
     # avldata = avl.getAvlData()
     # print(avldata)
 
