@@ -26,7 +26,6 @@ class TCPServer():
             print(f"[ACTIVE CONNECTIONS] {threading.activeCount() - 1}")
 
     def Communicator(self, conn, imei):
-        print("handshaking")
         accept_con_mes = '\x01'
         conn.send(accept_con_mes.encode('utf-8'))
         print("handshake complete")
@@ -40,7 +39,7 @@ class TCPServer():
                         w.writelines(recieved.decode('utf-8')+'\n')
                     # print(recieved)
                     vars = self.decodeVars(recieved, imei)
-                    print(vars)
+                    print("vars", vars)
                     resp = self.mResponse(vars['novars'])
                     time.sleep(60)
                     conn.send(resp)
