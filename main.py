@@ -47,7 +47,6 @@ class TCPServer():
                     time.sleep(60)
                     conn.send(resp)
                     # conn.send(struct.pack("!L", vars['novars']))
-                    print("done")
                 else:
                     break
             except Exception as e:
@@ -74,26 +73,6 @@ class TCPServer():
                 print("connection closed")
                 conn.close()
                 break
-    
-    def decodeVars(self, data, imei):
-        curr_time = self.getDateTime()
-        codecid   = int(data[16:18], 16)
-        record    = int(data[18:20], 16)
-        timestamp = int(data[20:36], 16)
-        lon       = int(data[38:46], 16)
-        lat       = int(data[46:54], 16)
-        alt       = int(data[54:58], 16)
-
-        vars = {
-            "sys-time": curr_time,
-            "imei"  : imei,
-            "codec" : codecid,
-            "novars": record,
-            "timestamp": timestamp,
-            "gps":{"lon": lon, "lat": lat},
-            "alt": alt
-        }
-        return vars
 
     def decoder(self, raw):
         decoded = binascii.hexlify(raw)
