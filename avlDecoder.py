@@ -2,6 +2,9 @@ import binascii
 import datetime
 
 from avlMatcher import avlIdMatcher
+from IO_decoder import IODecoder
+
+
 avl = avlIdMatcher()
 class avlDecoder():
     def __init__(self):
@@ -18,7 +21,15 @@ class avlDecoder():
         self.d_time_unix    = 0 
         self.d_time_local   = ""
         self.avl_io_raw     = ""
-
+        self.priority       = 0
+        self.lon            = 0
+        self.lat            = 0
+        self.alt            = 0
+        self.angle          = 0
+        self.satellites     = 0
+        self.speed          = 0
+        self.decoded_io     = {}
+        
     def decodeAVL(self, raw):
         self.raw_data      = raw
         self.codecid       = int(data[16:18], 16)      #codecid
@@ -39,8 +50,16 @@ class avlDecoder():
             self.avl_latest   = self.avl_entries[0]                                # latest avl data packets
             self.d_time_unix  = int(self.avl_latest[0:16],16)                      # device time unix
             self.d_time_local = self.unixtoLocal(self.d_time_unix)                 # device time local
+            self.priority     = int(data[16:18], 16)                               # device data priority
+            self.lon          = int(data[18:26], 16)                               # longitude
+            self.lat          = int(data[26:34], 16)                               # latitude
+            self.alt          = int(data[34:38], 16)                               # altitude
+            self.angle        = int(data[38:42], 16)                               # angle
+            self.satellites   = int(data[42:44], 16)                               # no of satellites
+            self.speed        = int(data[44:48], 16)                               # speed
+        
             self.avl_io_raw   = self.avl_latest[48:]                               # avl io data raw
-
+            
         else:
             return -1
 
@@ -59,8 +78,14 @@ class avlDecoder():
             # "avl_entries": self.avl_entries,
             # "avl_latest" : self.avl_latest,
             "d_time_unix" : self.d_time_unix,
-            "d_time_local": self.d_time_local
-            
+            "d_time_local": self.d_time_local,
+            "priority"    :self.priority,  
+            "lon"         :self.lon,
+            "lat"         :self.lat,
+            "alt"         :self.alt,       
+            "angle"       :self.angle,     
+            "satellites"  :self.satellites,
+            "speed"        :self.speed     
 
         }
         return data
