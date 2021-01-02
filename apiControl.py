@@ -1,5 +1,7 @@
 import requests
+from avlMatcher import avlIdMatcher
 
+avl_match = avlIdMatcher()
 class postRequest():
     def __init__(self):
         pass
@@ -8,6 +10,8 @@ class postRequest():
         res = requests.post(url, data=data)
         return res
 
+    def idToAvl(self, data):
+        pass
 
 
 if __name__ == "__main__":
