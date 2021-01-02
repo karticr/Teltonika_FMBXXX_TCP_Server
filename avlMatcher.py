@@ -1,6 +1,6 @@
 import json
 
-class avlController:
+class avlIdMatcher:
     def __init__(self):
         self.avl_data = self.loadData()
 
@@ -18,7 +18,7 @@ class avlController:
             return -1
 
 if __name__ == "__main__":
-    data = avlController()
+    data = avlIdMatcher()
     # print(data.avl_data)
     print(data.getAvlInfo("4")['name'])
     print(data.getAvlInfo("1"))
