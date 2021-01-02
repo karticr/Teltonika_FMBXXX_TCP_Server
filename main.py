@@ -37,12 +37,13 @@ class TCPServer():
                 data = conn.recv(1024)
                 if(data):
                     vars         = {}
-                    vars['imei'] = imei
                     recieved = self.decoder(data)
                     with open('raw.txt', 'a+') as w:
                         w.writelines(recieved.decode('utf-8')+'\n')
                     vars = avl_decoder.decodeAVL(recieved)
+                    vars['imei'] = imei.split("\x0f")[1]
                     print("vars", vars)
+                    post_requester.postToServer(vars)
                     resp = self.mResponse(vars['no_record_i'])
                     time.sleep(60)
                     conn.send(resp)
@@ -83,7 +84,6 @@ class TCPServer():
 
     def mResponse(self, data):
         return data.to_bytes(4, byteorder = 'big')
-
 
 
 if __name__ == '__main__':
