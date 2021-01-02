@@ -62,6 +62,7 @@ class avlDecoder():
             self.avl_io_raw   = self.avl_latest[48:]                               # avl io data raw
             self.decoded_io   = io.dataDecoder(self.avl_io_raw)                    # decoded avl data
             
+            return self.getAvlData()
         else:
             return -1
 
@@ -102,7 +103,7 @@ if __name__ == "__main__":
     avl = avlDecoder()
     res = avl.decodeAVL(data)
     print(res)
-    avldata = avl.getAvlData()
-    print(avldata)
+    # avldata = avl.getAvlData()
+    # print(avldata)
 
 
