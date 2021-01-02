@@ -4,27 +4,31 @@ from avlMatcher import avlIdMatcher
 avl_match = avlIdMatcher()
 class postRequest():
     def __init__(self):
-        pass
+        self.post_url = "https://api.skymarinealert.co.uk/boats/endpoint"
 
-    def post(self, url, data):
-        res = requests.post(url, data=data)
+    def postToServer(self,data, url = None):
+        url = url if url else self.post_url
+        res = requests.post(url, json=data)
         return res
 
     def avlToPostData(self, avl):
+        io = self.idToAvl(avl['io_data'])
+        # print(io)
         format = {
             "deviceId": avl['imei'],
             "nmea": {
-                "lat": avl['lat']/10000000,
-                "long": avl['lon']/10000000
+                "lat" : str(avl['lat']/10000000),
+                "long": str(avl['lon']/10000000)
             },
             "inputs":{
-                "temp1": 20,
-                "speed": 30,
-                "angle": 40,
-                "altitude": 50
+                "temp1"   : io['Dallas Temperature 1']/10,
+                "speed"   : int(avl['speed']),
+                "angle"   : int(avl['angle']),
+                "altitude": int(avl['alt']),
+                "pir"     : int(io['Digital Input 2'])
             },
             "outputs":{
-                "led":1,
+                "led":int(io['Digital Output 1']),
                 "buzzer":0
             }
         }
@@ -77,14 +81,30 @@ if __name__ == "__main__":
                 }
             }
 
-    
+    # print(data)
     a       = postRequest()
-    io_data = a.idToAvl(data['io_data'])
-    print(io_data)
-    print(io_data['Digital Input 2'])
     ready   = a.avlToPostData(data)
 
 
-    # print(ready)
-    # url = "https://api.skymarinealert.co.uk/boats/endpoint"
-    # print(a.post(url, data))
+    print(ready)
+
+    # ready = {
+    #         "deviceId": "352093081429150",
+    #         "nmea": {
+    #             "lat": "13.0465650",
+    #             "long": "80.1064433"
+    #         },
+    #         "inputs":{
+    #             "temp1": 20,
+    #             "speed": 30,
+    #             "angle": 40,
+    #             "altitude": 50,
+    #             "pir":1
+    #         },
+    #         "outputs":{
+    #             "led":1,
+    #             "buzzer":0
+    #         }
+    #     }
+    url = "https://api.skymarinealert.co.uk/boats/endpoint"
+    print(a.postToServer(ready))
