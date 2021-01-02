@@ -1,6 +1,8 @@
 import binascii
 import datetime
 
+from avlMatcher import avlIdMatcher
+avl = avlIdMatcher()
 class avlDecoder():
     def __init__(self):
         self.raw_data = ""
@@ -38,8 +40,6 @@ class avlDecoder():
             self.d_time_unix  = int(self.avl_latest[0:16],16)                      # device time unix
             self.d_time_local = self.unixtoLocal(self.d_time_unix)                 # device time local
             self.avl_io_raw   = self.avl_latest[48:]                               # avl io data raw
-
-
 
         else:
             return -1
