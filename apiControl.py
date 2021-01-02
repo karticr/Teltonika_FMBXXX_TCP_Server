@@ -6,7 +6,12 @@ class postRequest():
     def __init__(self):
         self.post_url = "https://api.skymarinealert.co.uk/boats/endpoint"
 
-    def postToServer(self,data, url = None):
+    def postToServer(self, raw_data):
+        formatted_data = self.avlToPostData(raw_data)
+        server_resp    = self.post(formatted_data)
+        return server_resp
+
+    def post(self,data, url = None):
         url = url if url else self.post_url
         res = requests.post(url, json=data)
         return res
@@ -83,7 +88,5 @@ if __name__ == "__main__":
 
     # print(data)
     a       = postRequest()
-    ready   = a.avlToPostData(data)
+    ready   = a.postToServer(data)
     print(ready)
-    url = "https://api.skymarinealert.co.uk/boats/endpoint"
-    print(a.postToServer(ready))
