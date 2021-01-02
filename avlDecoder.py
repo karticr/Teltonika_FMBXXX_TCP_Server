@@ -7,3 +7,7 @@ class avlDecoder():
     def unixtoLocal(self, unix_time):
         time = datetime.datetime.fromtimestamp(unix_time/1000)
         return f"{time:%Y-%m-%d %H:%M:%S}"
+
+    def getAvlData(self):
+        data = {}
+        return data
