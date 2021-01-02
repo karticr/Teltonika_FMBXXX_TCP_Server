@@ -7,20 +7,22 @@ class avlDecoder():
         self.initVars()
 
     def initVars(self):
-        self.codecid          = 0
-        self.no_records_i     = 0
-        self.no_records_e     = 0
-        self.crc_16           = 0
-        self.avl_entries      = []
-        self.avl_latest       = ""
-        self.device_time_unix = 0 
+        self.codecid        = 0
+        self.no_records_i   = 0
+        self.no_records_e   = 0
+        self.crc_16         = 0
+        self.avl_entries    = []
+        self.avl_latest     = ""
+        self.d_time_unix    = 0 
+        self.d_time_local   = ""
+        self.avl_io_raw     = ""
 
     def decodeAVL(self, raw):
         self.raw_data      = raw
         self.codecid       = int(data[16:18], 16)      #codecid
         self.no_record_i   = int(data[18:20], 16)      #first no of total records
         self.no_record_e   = int(data[-10:-8], 16)     #no of total records before crc-16 check
-        self.crc_16         = int(data[-8:],16)         #crc-16 check
+        self.crc_16         = int(data[-8:],16)        #crc-16 check
         
     
 
@@ -31,9 +33,12 @@ class avlDecoder():
             self.avl_entries = []
             for i in range(0, entries_size, division_size):
                 self.avl_entries.append(record_entries[i:i+division_size])
-            self.avl_latest = self.avl_entries[0]
-            
-            
+
+            self.avl_latest   = self.avl_entries[0]                                # latest avl data packets
+            self.d_time_unix  = int(self.avl_latest[0:16],16)                      # device time unix
+            self.d_time_local = self.unixtoLocal(self.d_time_unix)                 # device time local
+            self.avl_io_raw   = self.avl_latest[48:]                               # avl io data raw
+
 
 
         else:
@@ -52,7 +57,10 @@ class avlDecoder():
             "no_record_e": self.no_record_e,
             "crc-16"     : self.crc_16,
             # "avl_entries": self.avl_entries,
-            "avl_latest" : self.avl_latest 
+            # "avl_latest" : self.avl_latest,
+            "d_time_unix" : self.d_time_unix,
+            "d_time_local": self.d_time_local
+            
 
         }
         return data
