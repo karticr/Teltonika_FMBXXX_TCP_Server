@@ -1,16 +1,13 @@
-data = b'00000000000001bc080900000176bc2c30f1002fbf481707c6c03a002900991100000009080100020103000400b300b4003200330001480118000000000176bc2b4691002fbf481707c6c03a002900991000000009080100020103000400b300b4003200330001480118000000000176bc2a5c35002fbf481707c6c03a002900991000000009080100020103000400b300b4003200330001480119000000000176bc2971d5002fbf481707c6c03a002900990f00000009080100020103000400b300b4003200330001480119000000000176bc288775002fbf481707c6c03a002900990e00000009080100020103000400b300b4003200330001480119000000000176bc279d15002fbf481707c6c03a002900991100000009080100020103000400b300b4003200330001480119000000000176bc26b2b5002fbf481707c6c03a002900990f00000009080100020103000400b300b4003200330001480119000000000176bc25c859002fbf481707c6c03a002900990f00000009080100020103000400b300b4003200330001480119000000000176bc24ddf9002fbf481707c6c03a002900991000000009080100020103000400b300b40032003300014801190000090000cb7f'
-data = b'00000000000001bc080900000176bce01da0002fbf481707c6c03a001000990f00000009080100020103000400b301b401320033000148011d000000000176b9648c92002fbf4ac207c6bbed002000000400000009080100020103000400b300b40032003300014807d0000000000176b963a232002fbf4ac207c6bbed001d00000400000009080100020103000400b300b40032003300014807d0000000000176b962b7d5002fbf4ac207c6bbed001b00000400000009080100020103000400b300b40032003300014807d0000000000176b961cd75002fbf4ac207c6bbed001f00000500000009080100020103000400b300b40032003300014807d0000000000176b960e315002fbf4ac207c6bbed001e00000500000009080100020103000400b300b40032003300014807d0000000000176b95ff8b5002fbf4ac207c6bbed000000000000000009080100020103000400b300b40032003300014807d0000000000176b95f0e55002fbf4ac207c6bbed001900000400000009080100020103000400b300b40032003300014807d0000000000176b95e23f9002fbf4ac207c6bbed000000000000000009080100020103000400b300b40032003300014807d000000900002d87'
-data = b'000000000000003608010000016B40D8EA30010000000000000000000000000000000105021503010101425E0F01F10000601A014E0000000000000000010000C7CF'
-data = b'000000000000002808010000016B40D9AD80010000000000000000000000000000000103021503010101425E100000010000F22A'
+data = b'00000000000001bc080900000176c1d407e2022fbf452907c6befd001f00001000000209080100020103000400b300b400320033000148011d000000000176c1d3fca4022fbf452907c6befd001f00001000000209080100020003000400b300b400320033000148011d000000000176c152faca022fbf491107c6c260002c00170900000209080100020103000400b300b4003200330001480119000000000176c152f04f022fbf491107c6c260002c00170800000209080100020003000400b300b4003200330001480119000000000176c152ec40022fbf491107c6c260002c00170800000209080100020103000400b300b4003200330001480119000000000176c152dfc1022fbf491107c6c260002c00170800000209080100020003000400b300b4003200330001480119000000000176c152a6b7022fbf491107c6c260002c00170800000209080100020103000400b300b4003200330001480119000000000176c1528869022fbf491107c6c260002c00170800000209080100020003000400b300b4003200330001480119000000000176c1528253022fbf491107c6c260002c00170800000209080100020103000400b300b40032003300014801190000090000a013'
 import binascii
 from binascii import unhexlify
 import datetime
 import json
 
 
-from avlMatcher import avlController
+from avlMatcher import avlIdMatcher
 
-avl = avlController()
+avl = avlIdMatcher()
 
 def unixtolocal(unix_time):
     time = datetime.datetime.fromtimestamp(unix_time/1000)
@@ -21,7 +18,7 @@ def avlDecode(data, total):
     data = data.decode()
     single_size = int(len(data)/total)
     latest_data = data[0:single_size]
-    print(latest_data)
+    # print(latest_data)
     time       = int(data[0:16], 16)
     priority   = int(data[16:18], 16)
     lon        = int(data[18:26], 16)
@@ -34,20 +31,20 @@ def avlDecode(data, total):
     N_Tot_id   = int(data[50:52], 16)
     n_N1       = int(data[52:54], 16)
 
-    print("event io")
+    # print("event io")
 
-    print(eventIO_ID)
-    print(N_Tot_id)
-    print(n_N1)
+    # print(eventIO_ID)
+    # print(N_Tot_id)
+    # print(n_N1)
 
-    print("-------------")
+    # print("-------------")
     N1s_size   = n_N1*2*2
     N1s        = data[54:54+N1s_size]
-    print(N1s)
+    # print(N1s)
     # print("id", N1s[0:0+2])
 
     dataall    = data[48:]
-    print(dataall)
+    # print(dataall)
 
 
 
@@ -64,7 +61,7 @@ def avlDecode(data, total):
         "N1": n_N1
     }
 
-    print(fin)
+    # print(fin)
 
 
     # print('single', len(data)/total)
@@ -87,16 +84,29 @@ def avlDecode(data, total):
 
 
 def decodeVars(data):
+    data_field_length = int(data[8:16], 16)     # Data Field Length – size is calculated starting from Codec ID to Number of Data 2.
     codecid     = int(data[16:18], 16)
     no_record_i = int(data[18:20], 16)      #first no of total records
     no_record_e = int(data[-10:-8], 16)     #no of total records before crc-16 check
     crc_16      = int(data[-8:],16)            #crc-16 check
+    
+    print('tot records', no_record_i,"end:", no_record_e, "crc:", crc_16)
 
-    print('tot records', no_record_i, no_record_e, "crc:", crc_16)
+    data_field_length = data_field_length * 2
+    # print("field length: ", data_field_length)
+
+    end = data[16+data_field_length-2:]
+
+    # print(len(end))
+    # print("raw", end[0:2])
+    # print("end:", int(end[0:2], 16))
+    # print("crc:", int(end[2:], 16))
+
+    
 
     entries =  data[20:-10]
     # print(entries)
-    print("------------")
+    # print("------------")
     d_size   = len(entries)
     division = int(len(entries)/ no_record_i)
 
@@ -104,7 +114,7 @@ def decodeVars(data):
     for i in range(0, d_size, division):
         e_list.append(entries[i:i+division])
 
-    print(e_list[0])
+    print("latest:", e_list[0])
     e_1 = e_list[0]                                 #AVL Complete packet
 
     # for i in e_list:
@@ -114,21 +124,21 @@ def decodeVars(data):
     tie     = int(timerrr, 16)
     local   = unixtolocal(tie)
 
-    print("timer", timerrr)
-    print("unix", tie)
-    print("local", local)
+    # print("timer", timerrr)
+    # print("unix", tie)
+    # print("local", local)
 
-    print("-------------")
-    print("avl io", e_1[48:])                                # AVL IO packet 
+    # print("-------------")
+    # print("avl io", e_1[48:])                                # AVL IO packet 
 
 
     # print('len', int(data[20:], 16))
-    # avlDecode(data[20:-10], record)
-    # print("records", record)
+    avlDecode(data[20:-10], no_record_i)
+    print("no records", no_record_i)
     # print(int(data[-10:-8], 16))
-    # return vars
+    return vars
 
-print(decodeVars(data))
+decodeVars(data)
 
 
 

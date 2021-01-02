@@ -7,7 +7,8 @@ import json
 import datetime
 import struct
 
-accepted = False
+from avlDecoder import avlDecoder
+avl_decoder = avlDecoder()
 
 class TCPServer():
     def __init__(self, port):
@@ -32,15 +33,14 @@ class TCPServer():
         while True:
             try:
                 data = conn.recv(1024)
-                print("broken? ")
                 if(data):
                     recieved = self.decoder(data)
                     with open('raw.txt', 'a+') as w:
                         w.writelines(recieved.decode('utf-8')+'\n')
-                    # print(recieved)
-                    vars = self.decodeVars(recieved, imei)
+                    vars = avl_decoder.decodeAVL(recieved)
+
                     print("vars", vars)
-                    resp = self.mResponse(vars['novars'])
+                    resp = self.mResponse(vars['no_record_i'])
                     time.sleep(60)
                     conn.send(resp)
                     # conn.send(struct.pack("!L", vars['novars']))
@@ -71,7 +71,7 @@ class TCPServer():
                 print("how ?")
                 conn.close()
                 break
-
+    
     def decodeVars(self, data, imei):
         curr_time = self.getDateTime()
         codecid   = int(data[16:18], 16)
@@ -91,7 +91,6 @@ class TCPServer():
             "alt": alt
         }
         return vars
-
 
     def decoder(self, raw):
         decoded = binascii.hexlify(raw)
