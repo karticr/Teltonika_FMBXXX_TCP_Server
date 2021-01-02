@@ -11,14 +11,11 @@ class postRequest():
         return res
 
     def avlToPostData(self, avl):
-        return
-
-    def idToAvl(self, data):
         format = {
-            "deviceId": data['imei'],
+            "deviceId": avl['imei'],
             "nmea": {
-                "lat": data['lat']/10000000,
-                "long": data['lon']/10000000
+                "lat": avl['lat']/10000000,
+                "long": avl['lon']/10000000
             },
             "inputs":{
                 "temp1": 20,
@@ -31,6 +28,18 @@ class postRequest():
                 "buzzer":0
             }
         }
+        return format
+
+    def idToAvl(self, data):
+        format = {}
+        for i in data:
+            n_data = data[i]
+            for j in n_data:
+                id      = str(j)
+                id_name = avl_match.getAvlInfo(id)['name']
+                value   = n_data[j]
+                # print("Key: {}, Value: {}".format(id_name, value))
+                format[id_name] = value            
         return format
 
 
@@ -69,8 +78,13 @@ if __name__ == "__main__":
             }
 
     
-    a     = postRequest()
-    ready = a.idToAvl(data)
-    print(ready)
+    a       = postRequest()
+    io_data = a.idToAvl(data['io_data'])
+    print(io_data)
+    print(io_data['Digital Input 2'])
+    ready   = a.avlToPostData(data)
+
+
+    # print(ready)
     # url = "https://api.skymarinealert.co.uk/boats/endpoint"
     # print(a.post(url, data))
