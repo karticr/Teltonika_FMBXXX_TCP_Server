@@ -6,6 +6,7 @@ from IO_decoder import IODecoder
 
 
 avl = avlIdMatcher()
+io  = IODecoder()
 class avlDecoder():
     def __init__(self):
         self.raw_data = ""
@@ -29,7 +30,7 @@ class avlDecoder():
         self.satellites     = 0
         self.speed          = 0
         self.decoded_io     = {}
-        
+
     def decodeAVL(self, raw):
         self.raw_data      = raw
         self.codecid       = int(data[16:18], 16)      #codecid
@@ -59,6 +60,7 @@ class avlDecoder():
             self.speed        = int(data[44:48], 16)                               # speed
         
             self.avl_io_raw   = self.avl_latest[48:]                               # avl io data raw
+            self.decoded_io   = IODecoder(self.avl_io_raw)                         # decoded avl data
             
         else:
             return -1
@@ -85,8 +87,8 @@ class avlDecoder():
             "alt"         :self.alt,       
             "angle"       :self.angle,     
             "satellites"  :self.satellites,
-            "speed"        :self.speed     
-
+            "speed"       :self.speed,
+            "io_data"     :self.decoded_io    
         }
         return data
 
