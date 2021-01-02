@@ -48,13 +48,13 @@ class avlDecoder():
             print(self.avl_latest)
             self.d_time_unix  = int(self.avl_latest[0:16],16)                      # device time unix
             self.d_time_local = self.unixtoLocal(self.d_time_unix)                 # device time local
-            self.priority     = int(record_entries[16:18], 16)                               # device data priority
-            self.lon          = int(record_entries[18:26], 16)                               # longitude
-            self.lat          = int(record_entries[26:34], 16)                               # latitude
-            self.alt          = int(record_entries[34:38], 16)                               # altitude
-            self.angle        = int(record_entries[38:42], 16)                               # angle
-            self.satellites   = int(record_entries[42:44], 16)                               # no of satellites
-            self.speed        = int(record_entries[44:48], 16)                               # speed
+            self.priority     = int(record_entries[16:18], 16)                     # device data priority
+            self.lon          = int(record_entries[18:26], 16)                     # longitude
+            self.lat          = int(record_entries[26:34], 16)                     # latitude
+            self.alt          = int(record_entries[34:38], 16)                     # altitude
+            self.angle        = int(record_entries[38:42], 16)                     # angle
+            self.satellites   = int(record_entries[42:44], 16)                     # no of satellites
+            self.speed        = int(record_entries[44:48], 16)                     # speed
         
             self.avl_io_raw   = self.avl_latest[48:]                               # avl io data raw
             self.decoded_io   = io.dataDecoder(self.avl_io_raw)                    # decoded avl data
