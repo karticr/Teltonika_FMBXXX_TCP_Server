@@ -8,8 +8,10 @@ import datetime
 import struct
 
 from avlDecoder import avlDecoder
-avl_decoder = avlDecoder()
+from apiControl import postRequest
 
+avl_decoder    = avlDecoder()
+post_requester = postRequest()
 class TCPServer():
     def __init__(self, port):
         self.port = port
@@ -34,11 +36,12 @@ class TCPServer():
             try:
                 data = conn.recv(1024)
                 if(data):
+                    vars         = {}
+                    vars['imei'] = imei
                     recieved = self.decoder(data)
                     with open('raw.txt', 'a+') as w:
                         w.writelines(recieved.decode('utf-8')+'\n')
                     vars = avl_decoder.decodeAVL(recieved)
-
                     print("vars", vars)
                     resp = self.mResponse(vars['no_record_i'])
                     time.sleep(60)
@@ -50,7 +53,7 @@ class TCPServer():
             except Exception as e:
                 print(e)
                 break
-        print('exiting comms')
+        print('exiting tcp comms')
 
 
     def handle_client(self, conn, addr):
@@ -67,8 +70,8 @@ class TCPServer():
                 else:
                     break
             except Exception as e:
-                print(e)
-                print("how ?")
+                # print(e)
+                print("connection closed")
                 conn.close()
                 break
     
