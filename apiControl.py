@@ -18,7 +18,7 @@ class postRequest():
 
     def avlToPostData(self, avl):
         io = self.idToAvl(avl['io_data'])
-        print(io)
+        print("io",io)
         format = {
             "deviceId": avl['imei'],
             "nmea": {
