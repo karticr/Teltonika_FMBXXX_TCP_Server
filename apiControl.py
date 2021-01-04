@@ -34,8 +34,8 @@ class postRequest():
                 "pir"        : io.get('Digital Input 2') or 0
             },
             "outputs":{
-                "led"   :int(io.get('Digital Output 2')) or 0,
-                "buzzer":int(io.get('Digital Output 1')) or 0
+                "led"   :int(io.get('Digital Output 2') or 0),
+                "buzzer":int(io.get('Digital Output 1') or 0) 
             },
             "signal":{
                 "mSing": int(io.get('GSM Signal') or 0),
