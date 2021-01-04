@@ -27,18 +27,18 @@ class postRequest():
                 "speed"   : int(avl['speed'])
             },
             "inputs":{
-                "temp1"      : io['Dallas Temperature 1']/10,
-                "bat_volt"   : io['External Voltage']/1000,
-                "track_volt" : io['Battery Voltage']/1000,
-                "pir"        : int(io['Digital Input 2'])
+                "temp1"      : (io.get('Dallas Temperature 1') or  0)/10,
+                "bat_volt"   : (io.get('External Voltage') or 0)/1000,
+                "track_volt" : (io.get('Battery Voltage') or 0)/1000,
+                "pir"        : io.get('Digital Input 2') or 0
             },
             "outputs":{
-                "led"   :int(io['Digital Output 2']),
-                "buzzer":int(io['Digital Output 1'])
+                "led"   :int(io.get('Digital Output 2')) or 0,
+                "buzzer":int(io.get('Digital Output 1')) or 0
             },
             "signal":{
-                "mSing":int(io['GSM Signal']),
-                "mOp"  : io['GSM Cell ID']
+                "mSing":int(io.get('GSM Signal')),
+                "mOp"  : io.get('GSM Cell ID')
             }
         }
         return format

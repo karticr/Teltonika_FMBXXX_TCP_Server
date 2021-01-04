@@ -1,3 +1,5 @@
+import traceback
+
 class IODecoder():
     def __init__(self):
         self.IO_data = ""
@@ -97,6 +99,7 @@ class IODecoder():
             else:
                 return -1                                       # -1 error
         except Exception as e:
+            print(traceback.format_exc())
             print(e)
             return -1
 
@@ -111,11 +114,12 @@ class IODecoder():
 if __name__ == '__main__':
     n_data = "0009080100020103000400b301b401320033000148011d0000"
     n_data = "0105021503010101425E0F01F10000601A014E0000000000000000"
-    n_data = "00060301000200b40002422dea430f150148"
-    n_data = "00060301000200b40002422dea430f15014800000000"
-    n_data = "00060301000200b40002422dea430f15014800000000"
-
     n_data = "00060301000200b40002422dea430f1501480"
+    n_data = "0211090100020103000400b300b40032003300150307432685422f171800004801184"
+
+
+    # n_data = "00060301000200b40002422dea430f1501480"
+    
 
     # n_data = "0103021503010101425E100000"
     # data = dataDecoder(n_data)
