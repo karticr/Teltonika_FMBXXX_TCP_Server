@@ -45,7 +45,7 @@ class TCPServer():
                     print("vars", vars)
                     post_requester.postToServer(vars)
                     resp = self.mResponse(vars['no_record_i'])
-                    time.sleep(60)
+                    time.sleep(30)
                     conn.send(resp)
                     # conn.send(struct.pack("!L", vars['novars']))
                 else:
