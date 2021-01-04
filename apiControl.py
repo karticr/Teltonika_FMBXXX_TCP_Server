@@ -7,7 +7,10 @@ class postRequest():
         self.post_url = "https://api.skymarinealert.co.uk/boats/endpoint"
 
     def postToServer(self, raw_data):
-        formatted_data = self.avlToPostData(raw_data)
+        io = self.idToAvl(raw_data['io_data'])
+        print("io", io)
+        formatted_data = self.avlToPostData(raw_data, io)
+        print("after format",formatted_data)
         server_resp    = self.post(formatted_data)
         return server_resp
 
@@ -16,9 +19,7 @@ class postRequest():
         res = requests.post(url, json=data)
         return res
 
-    def avlToPostData(self, avl):
-        io = self.idToAvl(avl['io_data'])
-        print("io",io)
+    def avlToPostData(self, avl, io):
         format = {
             "deviceId": avl['imei'],
             "nmea": {
@@ -37,7 +38,7 @@ class postRequest():
                 "buzzer":int(io.get('Digital Output 1')) or 0
             },
             "signal":{
-                "mSing":int(io.get('GSM Signal')),
+                "mSing": int(io.get('GSM Signal') or 0),
                 "mOp"  : io.get('GSM Cell ID')
             }
         }
