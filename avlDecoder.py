@@ -45,6 +45,19 @@ class avlDecoder():
             for i in range(0, entries_size, division_size): 
                 self.avl_entries.append(record_entries[i:i+division_size])         # splitting into chunks
 
+            ####################### time test
+            time_list = []
+            for i in self.avl_entries:
+                try:
+                    raw_times = int(i[0:16],16)  
+                    time_list.append(self.unixtoLocal(raw_times))
+                except:
+                    pass
+            
+            print("time_list", time_list)
+                
+            #######################
+
             self.avl_latest   = self.avl_entries[0]                                # latest avl data packets
             # print(self.avl_latest)
             self.d_time_unix  = int(self.avl_latest[0:16],16)                      # device time unix

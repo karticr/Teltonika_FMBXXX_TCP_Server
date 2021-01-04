@@ -23,18 +23,22 @@ class postRequest():
             "deviceId": avl['imei'],
             "nmea": {
                 "lat" : str(avl['lat']/10000000),
-                "long": str(avl['lon']/10000000)
+                "long": str(avl['lon']/10000000),
+                "speed"   : int(avl['speed'])
             },
             "inputs":{
-                "temp1"   : io['Dallas Temperature 1']/10,
-                "speed"   : int(avl['speed']),
-                "angle"   : int(avl['angle']),
-                "altitude": int(avl['alt']),
-                "pir"     : int(io['Digital Input 2'])
+                "temp1"      : io['Dallas Temperature 1']/10,
+                "bat_volt"   : io['External Voltage']/1000,
+                "track_volt" : io['Battery Voltage']/1000,
+                "pir"        : int(io['Digital Input 2'])
             },
             "outputs":{
                 "led"   :int(io['Digital Output 2']),
                 "buzzer":int(io['Digital Output 1'])
+            },
+            "signal":{
+                "mSing":int(io['GSM Signal']),
+                "mOp"  : io['GSM Cell ID']
             }
         }
         return format
