@@ -6,6 +6,7 @@ import time
 import json
 import datetime
 import struct
+import traceback
 
 from avlDecoder import avlDecoder
 from apiControl import postRequest
@@ -34,7 +35,7 @@ class TCPServer():
         print("handshake complete")
         while True:
             try:
-                data = conn.recv(1024)
+                data = conn.recv(25000)
                 if(data):
                     vars         = {}
                     recieved = self.decoder(data)
@@ -51,6 +52,7 @@ class TCPServer():
                 else:
                     break
             except Exception as e:
+                print(traceback.format_exc())
                 print(e)
                 break
         print('exiting tcp comms')
