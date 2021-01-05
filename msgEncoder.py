@@ -36,6 +36,7 @@ class msgEncoder():
         print("msg hex:", self.complete_msg_hex)
         print("msg byte", self.complete_msg_byte)
         
+        return self.complete_msg_byte
         # codec12_info = self.msgCodec12()
 
 

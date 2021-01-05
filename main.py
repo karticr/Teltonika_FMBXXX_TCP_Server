@@ -10,9 +10,11 @@ import traceback
 
 from avlDecoder import avlDecoder
 from apiControl import postRequest
+from msgEncoder import msgEncoder
 
 avl_decoder    = avlDecoder()
 post_requester = postRequest()
+msg_encoder    = msgEncoder()
 class TCPServer():
     def __init__(self, port):
         self.port = port
@@ -42,17 +44,24 @@ class TCPServer():
                     with open('raw.txt', 'a+') as w:
                         w.writelines(recieved.decode('utf-8')+'\n')
                     vars = avl_decoder.decodeAVL(recieved)
-                    print("vars", vars)
-                    vars['imei'] = imei.split("\x0f")[1]
-                    print("vars", vars)
-                    post_requester.postToServer(vars)
-                    resp = self.mResponse(vars['no_record_i'])
-                    time.sleep(30)
-                    conn.send(resp)
-                    time.sleep(2)
-                    print("getinfo")
-                    d = b'\x00\x00\x00\x00\x00\x00\x00\x14\x0c\x01\x05\x00\x00\x00\x0csetdigout 10\x01\x00\x00.\xd4'
-                    conn.sendall(d)
+                    if(vars != -1):
+                        vars['imei'] = imei.split("\x0f")[1]
+                        print("vars", vars)
+                        from_app_server = post_requester.postToServer(vars)
+                        resp = self.mResponse(vars['no_record_i'])
+                        time.sleep(15)
+                        conn.send(resp)
+                        print("fromServer",from_app_server)
+                        if(from_app_server != -1):
+                            msg ='setdigout ' + from_app_server
+                            to_tracker = msg_encoder.msgToCodec12(msg, 'cmd')
+                            time.sleep(2)
+                            conn.sendall(to_tracker)
+                            
+                        # time.sleep(2)
+                        # print("getinfo")
+                        # d = b'\x00\x00\x00\x00\x00\x00\x00\x14\x0c\x01\x05\x00\x00\x00\x0csetdigout 10\x01\x00\x00.\xd4'
+                        # conn.sendall(d)
                     # conn.send(struct.pack("!L", vars['novars']))
                 else:
                     break
