@@ -46,8 +46,26 @@ class avlDecoder():
             # record_entries     = data[20:-10]                                    # entry data
             record_entries = data[self.first_io_start: self.io_end ]               # entry data
 
+            entries_size     = len(record_entries)                                 # total no of entries
+            division_size    = int(len(record_entries)/ self.no_record_i)          # division size
+            self.avl_entries = []
+
+            print("old size:", entries_size, "division:", division_size)
+            print("new size:", self.total_io_size, "division:", self.total_io_size/ self.no_record_e)
+
+            for i in range(0, entries_size, division_size): 
+                self.avl_entries.append(record_entries[i:i+division_size])         # splitting into chunks
+
+            
             self.avl_latest   = record_entries[0:self.first_io_end]                # latest avl data packets
-            # print(self.avl_latest)
+            
+            self.avl_latest_1   = self.avl_entries[0]    
+
+            print("________________________________________")
+            print("old:", self.avl_entries[0])
+            print("new:", self.avl_latest)
+            print("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾")
+
             self.d_time_unix  = int(self.avl_latest[0:16],16)                      # device time unix
             self.d_time_local = self.unixtoLocal(self.d_time_unix)                 # device time local
             self.priority     = int(record_entries[16:18], 16)                     # device data priority
@@ -59,7 +77,7 @@ class avlDecoder():
             self.speed        = int(record_entries[44:48], 16)                     # speed
         
             self.avl_io_raw   = self.avl_latest[48:]                               # avl io data raw
-            # print("raw io",self.avl_io_raw)                                       
+            print("raw io",self.avl_io_raw)                                       
 
             self.decoded_io   = io.dataDecoder(self.avl_io_raw)                    # decoded avl data
             return self.getAvlData()

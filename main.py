@@ -35,7 +35,7 @@ class TCPServer():
         print("handshake complete")
         while True:
             try:
-                data = conn.recv(25000)
+                data = conn.recv(1024)
                 if(data):
                     vars         = {}
                     recieved = self.decoder(data)

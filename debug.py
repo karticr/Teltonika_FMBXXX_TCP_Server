@@ -2,7 +2,7 @@ avl = "00000176c1d407e2022fbf452907c6befd001f00001000000209080100020103000400b30
 tes = "00000176c1d407e2022fbf452907c6befd001f00001000000209080100020103000400b300b400320033000148011d0000"
 
 
-{
+data = {
     'sys_time': '03/01/2021 02:31:12',
     'codecid': 8,
     'no_record_i': 8,
@@ -34,6 +34,12 @@ tes = "00000176c1d407e2022fbf452907c6befd001f00001000000209080100020103000400b30
     }
 }
 
-url = url if url is  not None else self.post_url
-        print(url)
-        print(data)
+# url = url if url is  not None else self.post_url
+#         print(url)
+#         print(data)
+
+a = data['angle']
+print(a)
+
+b = data.get('alt') or 5
+print(b)
