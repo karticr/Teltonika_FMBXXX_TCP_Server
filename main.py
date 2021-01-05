@@ -42,12 +42,17 @@ class TCPServer():
                     with open('raw.txt', 'a+') as w:
                         w.writelines(recieved.decode('utf-8')+'\n')
                     vars = avl_decoder.decodeAVL(recieved)
+                    print("vars", vars)
                     vars['imei'] = imei.split("\x0f")[1]
                     print("vars", vars)
                     post_requester.postToServer(vars)
                     resp = self.mResponse(vars['no_record_i'])
                     time.sleep(30)
                     conn.send(resp)
+                    time.sleep(2)
+                    print("getinfo")
+                    d = b'\x00\x00\x00\x00\x00\x00\x00\x14\x0c\x01\x05\x00\x00\x00\x0csetdigout 10\x01\x00\x00.\xd4'
+                    conn.sendall(d)
                     # conn.send(struct.pack("!L", vars['novars']))
                 else:
                     break
