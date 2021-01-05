@@ -1,16 +1,13 @@
 import libscrc
 
-class crcControl():
-    def __inint__(self):
-        self.b = "yolo"
+from toBytes import hexToBytes
 
+class crcControl():
     def crcGen(self, msg, byte_size=4, endian='big'):
-        encoded_msg = bytes.fromhex(msg)
-        crc16_raw   = libscrc.ibm(encoded_msg)
-        crc_in_bytes= crc16_raw.to_bytes(byte_size, byteorder=endian)
-        crc_in_hex  = crc_in_bytes.hex()
-        # print(crc_in_bytes)
-        # print(crc_in_hex)
+        encoded_msg = bytes.fromhex(msg)            #encode message to bytes for crc
+        crc16_raw   = libscrc.ibm(encoded_msg)      # generate crc using CRC-16-IBM Reversed
+        crc_in_bytes= hexToBytes(crc16_raw, 4)      # converting crc into 4 bytes
+        crc_in_hex  = crc_in_bytes.hex()            # converting crc into hex
         return {"hex": crc_in_hex, "bytes": crc_in_bytes}
 
 
