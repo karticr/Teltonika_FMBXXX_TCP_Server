@@ -1,6 +1,8 @@
 import binascii
 import libscrc
+
 from crcControl import crcControl
+from toBytes import hexToBytes
 
 crc = crcControl()
 
@@ -22,9 +24,20 @@ class msgEncoder():
 
         crc_data        = self.codec_id + self.cmd_quant_1 + self.cmd_type + self.cmd_size + self.cmd + self.cmd_quant_2
         self.crc        = crc.crcGen(crc_data)['hex']
+        # print("crc hex: ",self.crc, " crc bytes: ", crc.crcGen(crc_data)['bytes'])
         
-        self.hex_msg    = self.zero_bytes+self.data_size+self.codec_id+self.cmd_quant_1+self.cmd_type+self.cmd_size+self.cmd+self.cmd_quant_2+self.crc
-        print(self.msgCodec12())
+        msg_byte_size = 4+4+int((len(self.codec_id) + len(self.cmd_quant_1) + len(self.cmd_type) + len(self.cmd_size) + len(self.cmd) + len(self.cmd_quant_2))/2)+4
+
+        self.complete_msg_hex    = self.zero_bytes+self.data_size+self.codec_id+self.cmd_quant_1+self.cmd_type+self.cmd_size+self.cmd+self.cmd_quant_2+self.crc
+        msg_int                  = int(self.complete_msg_hex, 16)
+        self.complete_msg_byte   = hexToBytes(msg_int, msg_byte_size)
+
+        print("full msg size", msg_byte_size)
+        print("msg hex:", self.complete_msg_hex)
+        print("msg byte", self.complete_msg_byte)
+        
+        # codec12_info = self.msgCodec12()
+
 
     def msgCodec12(self):
         print(self.zero_bytes, self.data_size, self.codec_id, self.cmd_quant_1, self.cmd_type, self.cmd_size, self.cmd, self.cmd_quant_2, self.crc)
@@ -66,13 +79,13 @@ class msgEncoder():
             }
         }
         return data
-    def hexMsgTobytes(self, msg):
-        pass
+
+
 
 if __name__ == '__main__':
     a = msgEncoder()
     msg = 'setdigout 1 60'
-    msg = 'getinfo'
+    msg = 'setdigout 10'
     cmd_type = 'cmd'
     a.msgToCodec12(msg, cmd_type)
     
