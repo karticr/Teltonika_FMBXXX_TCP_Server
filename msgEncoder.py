@@ -1,5 +1,8 @@
 import binascii
 import libscrc
+from crcControl import crcControl
+
+crc = crcControl()
 
 class msgEncoder():
     def __init__(self):
@@ -18,10 +21,10 @@ class msgEncoder():
         self.data_size  = int((len(self.codec_id) + len(self.cmd_quant_1) + len(self.cmd_type) + len(self.cmd_size) + len(self.cmd) + len(self.cmd_quant_2))/2).to_bytes(4, byteorder='big').hex()
 
         crc_data        = self.codec_id + self.cmd_quant_1 + self.cmd_type + self.cmd_size + self.cmd + self.cmd_quant_2
-        print(crc_data)
-        crc_encoded     = bytes.fromhex(crc_data)
-        crc16_raw       = libscrc.ibm(crc_encoded)
-        self.crc        = crc16_raw.to_bytes(4, byteorder='big').hex()
+        # print("crc data",crc_data)
+        self.crc        = crc.crcGen(crc_data)['hex']
+        
+        self.hex_msg    = self.zero_bytes+self.data_size+self.codec_id+self.cmd_quant_1+self.cmd_type+self.cmd_size+self.cmd+self.cmd_quant_2+self.crc
         
         self.printer()
 
