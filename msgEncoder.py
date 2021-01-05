@@ -1,4 +1,5 @@
 import binascii
+import libscrc
 
 class msgEncoder():
     def __init__(self):
@@ -6,23 +7,32 @@ class msgEncoder():
 
     def msgToCodec12(self, msg, cmd_type):
         self.zero_bytes = '00000000'
-        self.data_size  = 'wait'
 
-        self.codec_id   = 'OC'
-        self.cmd_quant  = '01'
-        self.cmd_type   = '05' if cmd_type == 'cmd' else '06'
-        self.cmd_size   = len(msg).to_bytes(4, byteorder='big').hex()
-        self.cmd        = binascii.hexlify(msg.encode('utf-8')).decode()
+        self.codec_id    = '0C'
+        self.cmd_quant_1 = '01'
+        self.cmd_type    = '05' if cmd_type == 'cmd' else '06'
+        self.cmd_size    = len(msg).to_bytes(4, byteorder='big').hex()
+        self.cmd         = binascii.hexlify(msg.encode('utf-8')).decode()
+        self.cmd_quant_2 = '01'
+        
+        self.data_size  = int((len(self.codec_id) + len(self.cmd_quant_1) + len(self.cmd_type) + len(self.cmd_size) + len(self.cmd) + len(self.cmd_quant_2))/2).to_bytes(4, byteorder='big').hex()
+
+        crc_data        = self.codec_id + self.cmd_quant_1 + self.cmd_type + self.cmd_size + self.cmd + self.cmd_quant_2
+        print(crc_data)
+        crc_encoded     = bytes.fromhex(crc_data)
+        crc16_raw       = libscrc.ibm(crc_encoded)
+        self.crc        = crc16_raw.to_bytes(4, byteorder='big').hex()
+        
         self.printer()
 
     def printer(self):
-        print(self.zero_bytes, self.data_size, self.codec_id, self.cmd_quant, self.cmd_type, self.cmd_size, self.cmd)
+        print(self.zero_bytes, self.data_size, self.codec_id, self.cmd_quant_1, self.cmd_type, self.cmd_size, self.cmd, self.cmd_quant_2, self.crc)
 
 
 
 if __name__ == '__main__':
     a = msgEncoder()
-    msg = 'getinfo'
+    msg = 'setdigout 1 60'
     cmd_type = 'cmd'
     a.msgToCodec12(msg, cmd_type)
     
