@@ -1,5 +1,3 @@
-# Teltonika_FMBXXX_TCP_Server
-teltonika fmb tcp control server
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -13,7 +11,7 @@ teltonika fmb tcp control server
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]- [Teltonika_FMBXXX_TCP_Server]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -21,19 +19,16 @@ teltonika fmb tcp control server
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Teltonika FMBXXX Tracker server</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Python based tcp server to recieve and control teltonika fmb devices
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/karticr/Teltonika_FMBXXX_TCP_Server/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/karticr/Teltonika_FMBXXX_TCP_Server/issues">Request Feature</a>
   </p>
 </p>
 
