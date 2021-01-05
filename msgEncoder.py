@@ -1,3 +1,4 @@
+import binascii
 
 class msgEncoder():
     def __init__(self):
@@ -5,14 +6,17 @@ class msgEncoder():
 
     def msgToCodec12(self, msg, cmd_type):
         self.zero_bytes = '00000000'
+        self.data_size  = 'wait'
+
         self.codec_id   = 'OC'
         self.cmd_quant  = '01'
         self.cmd_type   = '05' if cmd_type == 'cmd' else '06'
         self.cmd_size   = len(msg).to_bytes(4, byteorder='big').hex()
-        self.data_size  = len("ss")
+        self.cmd        = binascii.hexlify(msg.encode('utf-8')).decode()
         self.printer()
+
     def printer(self):
-        print(self.zero_bytes, self.codec_id, self.cmd_quant, self.cmd_type, self.cmd_size)
+        print(self.zero_bytes, self.data_size, self.codec_id, self.cmd_quant, self.cmd_type, self.cmd_size, self.cmd)
 
 
 
