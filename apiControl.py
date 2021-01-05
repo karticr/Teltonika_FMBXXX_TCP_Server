@@ -1,5 +1,6 @@
 import requests
 from avlMatcher import avlIdMatcher
+import json
 
 avl_match = avlIdMatcher()
 class postRequest():
@@ -10,13 +11,26 @@ class postRequest():
         io = self.idToAvl(raw_data['io_data'])
         print("io", io)
         formatted_data = self.avlToPostData(raw_data, io)
-        print("after format",formatted_data)
+        # print("after format",formatted_data)
         server_resp    = self.post(formatted_data)
-        return server_resp
+        control = server_resp.text
+        control = json.loads(control)
+
+        control = control['response']
+        resp = control.get('outputs') or -1
+        if( resp != -1):
+            print("okay?")
+            data = self.serverToTracker(control['outputs'])
+            # print('digoutdata', data)
+            return data
+        
+        return -1
 
     def post(self,data, url = None):
         url = url if url else self.post_url
         res = requests.post(url, json=data)
+        # print("status", res.status_code)
+        print("text", res.text)
         return res
 
     def avlToPostData(self, avl, io):
@@ -34,8 +48,8 @@ class postRequest():
                 "pir"        : io.get('Digital Input 2') or 0
             },
             "outputs":{
-                "led"   :io.get('Digital Output 2') or 0,
-                "buzzer":io.get('Digital Output 1') or 0
+                "led"   :io.get('Digital Output 1') or 0,
+                "buzzer":io.get('Digital Output 0') or 0
             },
             "signal":{
                 "mSing": int(io.get('GSM Signal') or 0),
@@ -56,6 +70,19 @@ class postRequest():
                 format[id_name] = value            
         return format
 
+    def serverToTracker(self, data):
+        temp=[]
+        for i in data:
+            if(i=='led'):
+                temp.append(str(data[i]))
+            else:
+                temp.append('0')
+            if(i=='buzzer'):
+                temp.append(str(data[i]))
+            else:
+                temp.append('0')
+        new = ''.join(temp)
+        return new
 
 if __name__ == "__main__":
     data = {    
