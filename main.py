@@ -89,6 +89,6 @@ class TCPServer():
 
 
 if __name__ == '__main__':
-    port = 5001
+    port = 5002
     data = TCPServer(port)
     data.tcpServer()
