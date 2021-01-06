@@ -84,12 +84,44 @@ if __name__ == '__main__':
             },
         'imei': '358480080551601'
     }
+    data = {
+        'sys_time': '06/01/2021 05:42:22', 
+        'codecid': 8, 
+        'no_record_i': 2, 
+        'no_record_e': 2, 
+        'crc-16': 2867, 
+        'd_time_unix': 1609611610300, 
+        'd_time_local': '2021-01-02 23:50:10', 
+        'priority': 0, 
+        'lon': 801064250, 
+        'lat': 130465916, 
+        'alt': 85, 
+        'angle': 0, 
+        'satellites': 6, 
+        'speed': 0, 
+        'io_data': {
+            'n1': {
+                str(1): 0, 
+                str(2): 1, 
+                str(3): 0, 
+                str(4): 0, 
+                str(179): 0, 
+                str(180): 1, 
+                str(50): 0, 
+                str(51): 0
+                }, 
+            'n2': {
+                str(72): 281
+                }
+            },
+        'imei':'352093081429150'
+        }
 
-    # a.RegisterTracker(data)
-    from_db = a.findTracker('358480080551601')
+    a.RegisterTracker(data)
+    from_db = a.findTracker('352093081429150')
     io = from_db['io_data']
     # print(io)
     io_data = avl.idToAvl(io)
     # print(io_data)
-    outputs = a.getTrackerOutputs('358480080551601')
+    outputs = a.getTrackerOutputs('352093081429150')
     print(outputs)
