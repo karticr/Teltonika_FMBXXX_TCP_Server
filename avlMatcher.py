@@ -17,6 +17,18 @@ class avlIdMatcher:
             print("id not found")
             return -1
 
+    def idToAvl(self, data):
+        format = {}
+        for i in data:
+            n_data = data[i]
+            for j in n_data:
+                id      = str(j)
+                id_name = self.getAvlInfo(id)['name']
+                value   = n_data[j]
+                # print("Key: {}, Value: {}".format(id_name, value))
+                format[id_name] = value            
+        return format
+
 if __name__ == "__main__":
     data = avlIdMatcher()
     # print(data.avl_data)

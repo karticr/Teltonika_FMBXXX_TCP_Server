@@ -8,7 +8,7 @@ class postRequest():
         self.post_url = "https://api.skymarinealert.co.uk/boats/endpoint"
 
     def postToServer(self, raw_data):
-        io = self.idToAvl(raw_data['io_data'])
+        io = avl_match.idToAvl(raw_data['io_data'])
         print("io", io)
         formatted_data = self.avlToPostData(raw_data, io)
         # print("after format",formatted_data)
@@ -56,18 +56,6 @@ class postRequest():
                 "mOp"  : io.get('GSM Cell ID')
             }
         }
-        return format
-
-    def idToAvl(self, data):
-        format = {}
-        for i in data:
-            n_data = data[i]
-            for j in n_data:
-                id      = str(j)
-                id_name = avl_match.getAvlInfo(id)['name']
-                value   = n_data[j]
-                # print("Key: {}, Value: {}".format(id_name, value))
-                format[id_name] = value            
         return format
 
     def serverToTracker(self, data):
