@@ -5,6 +5,8 @@ from threading import Thread
 class connControl:
     def __init__(self):
         self.active_connections = {}
+        th = Thread(target=self.postRequester)
+        th.start()
 
     def addNew(self, connection):
         imei = connection['imei']
@@ -30,6 +32,7 @@ class connControl:
     def postRequester(self):
         while True:
             print("here post requester")
+            print(self.getActiveConnections())
             sleep(5)
 class test:
     def yolo(self):
