@@ -11,7 +11,7 @@ class IODecoder():
         for i in range(0,  N1s_size, 4):
             id  = int(N1s[i:i+2], 16)
             val = int(N1s[i+2:i+4], 16)
-            temp[int(id)] = val
+            temp[str(id)] = val
         return temp
 
     def ioDecoderN2(self, N2s, N2_size):
@@ -20,7 +20,7 @@ class IODecoder():
         for i in range(0, N2_size, 6):
             id  = int(N2s[i:i+2], 16)
             val = int(N2s[i+2: i+2+4], 16)
-            temp[int(id)] = val
+            temp[str(id)] = val
         return temp
 
     def ioDecoderN4(self, N4s, N4_size):
@@ -28,7 +28,7 @@ class IODecoder():
         for i in range (0, N4_size, 10):
             id  = int(N4s[i:i+2], 16)
             val = int(N4s[i+2: i+10], 16)
-            temp[int(id)] = val
+            temp[str(id)] = val
         return temp
 
     def ioDecoderN8(self, N8s, N8_size):
@@ -37,11 +37,11 @@ class IODecoder():
             if(i == 0):
                 id  = int(N8s[i:i+2], 16)
                 val = int(N8s[i+2:i+18], 16)
-                temp[int(id)] = val
+                temp[str(id)] = val
             elif(i>18):
                 id  = int(N8s[i+8:i+10], 16)
                 val = int(N8s[i+10:i+18], 16)
-                temp[int(id)] = val
+                temp[str(id)] = val
         return temp
 
     def dataDecoder(self, n_data):
