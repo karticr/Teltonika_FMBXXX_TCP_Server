@@ -27,6 +27,7 @@ class TCPServer():
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         self.sock.bind(('', self.port))
+        self.timeout_seconds = 60
 
     def tcpServer(self):
         self.sock.listen()
@@ -42,7 +43,8 @@ class TCPServer():
         print("handshake complete")
         while True:
             try:
-                data = conn.recv(25000)
+                data = conn.recv(1024)
+                conn.settimeout(self.timeout_seconds)
                 if(data):
                     vars         = {}
                     recieved = self.decoder(data)
@@ -80,8 +82,12 @@ class TCPServer():
                 else:
                     break
             except Exception as e:
+            # except socket.timeout:
+                c_ctrl.removeConnection(str(imei))
                 print(traceback.format_exc())
                 print(e)
+                print("nonono")
+                conn.close()
                 break
         print('exiting tcp comms')
 
@@ -109,7 +115,6 @@ class TCPServer():
             except Exception as e:
                 # print(e)
                 print("connection closed")
-                c_ctrl.removeConnection(str(imei).replace(' ', ''))
                 conn.close()
                 break
 
