@@ -2,6 +2,10 @@ import traceback
 from time import sleep
 from threading import Thread
 
+from database import mongoController
+
+db = mongoController()
+
 class connControl:
     def __init__(self):
         self.active_connections = {}
@@ -16,6 +20,7 @@ class connControl:
 
     def removeConnection(self,imei):
         try:
+            print("connection deleted")
             self.active_connections.pop(imei)
             return True
         except Exception as e:
@@ -31,8 +36,13 @@ class connControl:
 
     def postRequester(self):
         while True:
-            print("here post requester")
-            print(self.getActiveConnections())
+            print('post request')
+            for imei in self.active_connections:
+                print(imei)
+                print(self.active_connections[imei])
+                # data = db.getTrackerOutputs(imei)
+                data = db.findTracker(imei)
+                print(data)
             sleep(5)
 class test:
     def yolo(self):
