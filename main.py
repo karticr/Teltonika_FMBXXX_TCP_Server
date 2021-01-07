@@ -50,7 +50,7 @@ class TCPServer():
                         w.writelines(recieved.decode('utf-8')+'\n')
                     vars = avl_decoder.decodeAVL(recieved)
                     if(vars != -1):
-                        vars['imei'] = imei.split("\x0f")[1]
+                        vars['imei'] = imei
                         print("vars", vars)
 
                         if(db.isRegisterd(vars['imei'])):
@@ -96,8 +96,10 @@ class TCPServer():
                 if(imei_data):
                     imei = imei_data.decode('utf-8')
                     print(imei)
+                    imei = imei.split("\x0f")[1]
+                    imei = imei.replace(' ', '')
                     ctrl_data = {
-                        "imei": str(imei).replace(' ', ''),
+                        "imei": imei,
                         "conn":conn
                     }
                     c_ctrl.addNew(ctrl_data)
