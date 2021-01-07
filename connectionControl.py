@@ -3,8 +3,11 @@ from time import sleep
 from threading import Thread
 
 from database import mongoController
+from msgEncoder import msgEncoder
 
 db = mongoController()
+msg_encoder    = msgEncoder()
+
 
 class connControl:
     def __init__(self):
