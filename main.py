@@ -12,11 +12,13 @@ from avlDecoder import avlDecoder
 from apiControl import postRequest
 from msgEncoder import msgEncoder
 from connectionControl import connControl
+from database import mongoController
 
 avl_decoder    = avlDecoder()
 post_requester = postRequest()
 msg_encoder    = msgEncoder()
 c_ctrl         = connControl()
+db             = mongoController()
 
 class TCPServer():
     def __init__(self, port):
@@ -50,16 +52,25 @@ class TCPServer():
                     if(vars != -1):
                         vars['imei'] = imei.split("\x0f")[1]
                         print("vars", vars)
-                        from_app_server = post_requester.postToServer(vars)
+
+                        if(db.isRegisterd(vars['imei'])):
+                            print("saving to db")
+                            db.updateTracker(vars)
+
+                        else:
+                            print("registring device")
+                            db.RegisterTracker(vars)
+
                         resp = self.mResponse(vars['no_record_i'])
                         time.sleep(15)
                         conn.send(resp)
-                        print("fromServer",from_app_server)
-                        if(from_app_server != -1):
-                            msg ='setdigout ' + from_app_server
-                            to_tracker = msg_encoder.msgToCodec12(msg, 'cmd')
-                            time.sleep(2)
-                            conn.sendall(to_tracker)
+                        # from_app_server = post_requester.postToServer(vars)
+                        # print("fromServer",from_app_server)
+                        # if(from_app_server != -1):
+                        #     msg ='setdigout ' + from_app_server
+                        #     to_tracker = msg_encoder.msgToCodec12(msg, 'cmd')
+                        #     time.sleep(2)
+                        #     conn.sendall(to_tracker)
                             
                         # time.sleep(2)
                         # print("getinfo")
@@ -96,6 +107,7 @@ class TCPServer():
             except Exception as e:
                 # print(e)
                 print("connection closed")
+                c_ctrl.removeConnection(str(imei).replace(' ', ''))
                 conn.close()
                 break
 
