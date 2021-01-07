@@ -4,10 +4,11 @@ from threading import Thread
 
 from database import mongoController
 from msgEncoder import msgEncoder
+from apiControl import postRequest
 
 db = mongoController()
 msg_encoder    = msgEncoder()
-
+post_requester = postRequest()
 
 class connControl:
     def __init__(self):
@@ -41,12 +42,15 @@ class connControl:
         while True:
             print('post request')
             for imei in self.active_connections:
-                print(imei)
-                print(self.active_connections[imei])
+                print("ime",imei)
+                conn = self.active_connections[imei][]
                 # data = db.getTrackerOutputs(imei)
                 data = db.findTracker(imei)
+                app_server_resp = post_requester.postToServer(data)
+                if(app_server_resp != -1):
+
                 print(data)
-            sleep(5)
+            sleep(10)
 class test:
     def yolo(self):
         return yolo
