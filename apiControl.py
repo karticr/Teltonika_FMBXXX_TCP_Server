@@ -1,8 +1,12 @@
 import requests
-from avlMatcher import avlIdMatcher
 import json
 
+from avlMatcher import avlIdMatcher
+from database import mongoController
+
 avl_match = avlIdMatcher()
+db = mongoController()
+
 class postRequest():
     def __init__(self):
         self.post_url = "https://api.skymarinealert.co.uk/boats/endpoint"
@@ -59,16 +63,18 @@ class postRequest():
         return format
 
     def serverToTracker(self, data):
+        last_save = db.getTrackerOutputs(imei)
         temp=[]
         for i in data:
-            if(i=='led'):
+            if(i=='output1'):
+                last_save[0] = str(data[i]))
+            else:
+                temp.append(last_save[0])
+                
+            if(i=='output2'):
                 temp.append(str(data[i]))
             else:
-                temp.append('0')
-            if(i=='buzzer'):
-                temp.append(str(data[i]))
-            else:
-                temp.append('0')
+                temp.append(last_save[1])
         new = ''.join(temp)
         return new
 
