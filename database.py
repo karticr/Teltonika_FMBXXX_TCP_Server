@@ -20,6 +20,18 @@ class mongoController:
         if(not self.isRegisterd(data['imei'])):
             return bool(self.reg.insert_one(data))
 
+    def updateTrackerOutputs(self, imei, data):
+        print(data)
+        if(self.isRegisterd(imei)):
+            for i in data:
+                key = "io_data.n1.{}".format(i)
+                value = data[i]
+                self.reg.find_one_and_update({"imei":imei},{
+                        '$set':{
+                            key:value
+                                }
+                        })
+
     def getTrackerOutputs(self, imei):
         if(self.isRegisterd(imei)):
             data   = self.reg.find_one({'imei': imei})
@@ -50,6 +62,8 @@ class mongoController:
 
 if __name__ == '__main__':
     a = mongoController()
+    data =  {'179': 1, '180': 0}
+    a.updateTrackerOutputs('358480080551601', data)
     data = {
         'sys_time': '06/01/2021 04:43:54', 
         'codecid': 8, 
@@ -82,47 +96,48 @@ if __name__ == '__main__':
             },
         'imei': '358480080551601'
     }
-    # data = {
-        # 'sys_time': '06/01/2021 05:42:22', 
-        # 'codecid': 8, 
-        # 'no_record_i': 2, 
-        # 'no_record_e': 2, 
-        # 'crc-16': 2867, 
-        # 'd_time_unix': 1609611610300, 
-        # 'd_time_local': '2021-01-02 23:50:10', 
-        # 'priority': 0, 
-        # 'lon': 801064250, 
-        # 'lat': 130465916, 
-        # 'alt': 85, 
-        # 'angle': 0, 
-        # 'satellites': 6, 
-        # 'speed': 0, 
-        # 'io_data': {
-        #     'n1': {
-        #         str(1): 0, 
-        #         str(2): 1, 
-        #         str(3): 0, 
-        #         str(4): 0, 
-        #         str(179): 0, 
-        #         str(180): 1, 
-        #         str(50): 0, 
-        #         str(51): 0
-        #         }, 
-        #     'n2': {
-        #         str(72): 281
-        #         }
-        #     },
-        # 'imei':'352093081429150'
-        # }
-    d_imei = '358480080551601'
-    if(a.isRegisterd(d_imei)):
-        from_db = a.findTracker(d_imei)
-        io = from_db['io_data']
-        print(io)
-        io_data = avl.idToAvl(io)
-        print(io_data)
-        outputs = a.getTrackerOutputs(d_imei)
-        print(outputs)
-    else:
-        a.RegisterTracker(data)
+    # a.updateTracker(data)
+    # # data = {
+    #     # 'sys_time': '06/01/2021 05:42:22', 
+    #     # 'codecid': 8, 
+    #     # 'no_record_i': 2, 
+    #     # 'no_record_e': 2, 
+    #     # 'crc-16': 2867, 
+    #     # 'd_time_unix': 1609611610300, 
+    #     # 'd_time_local': '2021-01-02 23:50:10', 
+    #     # 'priority': 0, 
+    #     # 'lon': 801064250, 
+    #     # 'lat': 130465916, 
+    #     # 'alt': 85, 
+    #     # 'angle': 0, 
+    #     # 'satellites': 6, 
+    #     # 'speed': 0, 
+    #     # 'io_data': {
+    #     #     'n1': {
+    #     #         str(1): 0, 
+    #     #         str(2): 1, 
+    #     #         str(3): 0, 
+    #     #         str(4): 0, 
+    #     #         str(179): 0, 
+    #     #         str(180): 1, 
+    #     #         str(50): 0, 
+    #     #         str(51): 0
+    #     #         }, 
+    #     #     'n2': {
+    #     #         str(72): 281
+    #     #         }
+    #     #     },
+    #     # 'imei':'352093081429150'
+    #     # }
+    # d_imei = '358480080551601'
+    # if(a.isRegisterd(d_imei)):
+    #     from_db = a.findTracker(d_imei)
+    #     io = from_db['io_data']
+    #     print(io)
+    #     io_data = avl.idToAvl(io)
+    #     print(io_data)
+    #     outputs = a.getTrackerOutputs(d_imei)
+    #     print(outputs)
+    # else:
+    #     a.RegisterTracker(data)
 
