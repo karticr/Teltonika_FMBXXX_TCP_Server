@@ -11,10 +11,13 @@ import traceback
 from avlDecoder import avlDecoder
 from apiControl import postRequest
 from msgEncoder import msgEncoder
+from connectionControl import connControl
 
 avl_decoder    = avlDecoder()
 post_requester = postRequest()
 msg_encoder    = msgEncoder()
+c_ctrl         = connControl()
+
 class TCPServer():
     def __init__(self, port):
         self.port = port
@@ -82,6 +85,11 @@ class TCPServer():
                 if(imei_data):
                     imei = imei_data.decode('utf-8')
                     print(imei)
+                    ctrl_data = {
+                        "imei": str(imei).replace(' ', ''),
+                        "conn":conn
+                    }
+                    c_ctrl.addNew(ctrl_data)
                     self.Communicator(conn, imei)
                 else:
                     break
