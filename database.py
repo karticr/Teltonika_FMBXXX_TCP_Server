@@ -21,7 +21,7 @@ class mongoController:
             return bool(self.reg.insert_one(data))
 
     def updateTrackerOutputs(self, imei, data):
-        print(data)
+        # print(data)
         if(self.isRegisterd(imei)):
             for i in data:
                 key = "io_data.n1.{}".format(i)
@@ -62,40 +62,40 @@ class mongoController:
 
 if __name__ == '__main__':
     a = mongoController()
-    data =  {'179': 1, '180': 0}
-    a.updateTrackerOutputs('358480080551601', data)
-    data = {
-        'sys_time': '06/01/2021 04:43:54', 
-        'codecid': 8, 
-        'no_record_i': 1, 
-        'no_record_e': 1, 
-        'crc-16': 53322, 
-        'd_time_unix': 1609888433000, 
-        'd_time_local': '2021-01-06 04:43:53', 
-        'priority': 0, 'lon': 801066466, 
-        'lat': 130463916, 
-        'alt': 0, 
-        'angle': 0, 
-        'satellites': 0, 
-        'speed': 0, 
-        'io_data': {
-            'n1': {
-                str(21): 3, 
-                str(1): 0, 
-                str(179): 0, 
-                str(2): 0, 
-                str(180): 0}, 
-            'n2': {
-                str(66): 11791, 
-                str(205): 11492, 
-                str(67): 4110
-                }, 
-            'n4': {
-                str(72): 273
-                }
-            },
-        'imei': '358480080551601'
-    }
+    # data =  {'179': 1, '180': 0}
+    # a.updateTrackerOutputs('358480080551601', data)
+    # data = {
+    #     'sys_time': '06/01/2021 04:43:54', 
+    #     'codecid': 8, 
+    #     'no_record_i': 1, 
+    #     'no_record_e': 1, 
+    #     'crc-16': 53322, 
+    #     'd_time_unix': 1609888433000, 
+    #     'd_time_local': '2021-01-06 04:43:53', 
+    #     'priority': 0, 'lon': 801066466, 
+    #     'lat': 130463916, 
+    #     'alt': 0, 
+    #     'angle': 0, 
+    #     'satellites': 0, 
+    #     'speed': 0, 
+    #     'io_data': {
+    #         'n1': {
+    #             str(21): 3, 
+    #             str(1): 0, 
+    #             str(179): 0, 
+    #             str(2): 0, 
+    #             str(180): 0}, 
+    #         'n2': {
+    #             str(66): 11791, 
+    #             str(205): 11492, 
+    #             str(67): 4110
+    #             }, 
+    #         'n4': {
+    #             str(72): 273
+    #             }
+    #         },
+    #     'imei': '358480080551601'
+    # }
     # a.updateTracker(data)
     # # data = {
     #     # 'sys_time': '06/01/2021 05:42:22', 
