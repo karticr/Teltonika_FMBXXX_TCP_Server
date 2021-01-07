@@ -53,7 +53,7 @@ class TCPServer():
                     vars = avl_decoder.decodeAVL(recieved)
                     if(vars != -1):
                         vars['imei'] = imei
-                        print("vars", vars)
+                        # print("vars", vars)
 
                         if(db.isRegisterd(vars['imei'])):
                             print("saving to db")

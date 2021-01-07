@@ -1,4 +1,5 @@
 import traceback
+import json
 from time import sleep
 from threading import Thread
 
@@ -13,6 +14,7 @@ post_requester = postRequest()
 class connControl:
     def __init__(self):
         self.active_connections = {}
+        self.trackers_info = self.loadTrackerInfo()
         th = Thread(target=self.postRequester)
         th.start()
 
@@ -40,17 +42,40 @@ class connControl:
 
     def postRequester(self):
         while True:
-            print('post request')
             for imei in self.active_connections:
-                print("ime",imei)
-                conn = self.active_connections[imei][]
+                # print("ime",imei)
+                conn = self.active_connections[imei]
                 # data = db.getTrackerOutputs(imei)
                 data = db.findTracker(imei)
                 app_server_resp = post_requester.postToServer(data)
+                print("----------------------------------------------")
                 if(app_server_resp != -1):
+                    t_info = self.trackers_info.get(imei) or -1
+                    if(t_info == -1):
+                        return -1010
+                    else:
+                        total   = t_info['outputs']['total']
+                        outputs = t_info['outputs']['ids']
+                        db_output_data = {}
+                        for i in range(total):
+                            db_output_data[outputs[i]] = int(app_server_resp[i])
+                        
+                        print("db update data", db_output_data)
+                        db.updateTrackerOutputs(imei, db_output_data)
+                        msg ='setdigout ' + app_server_resp
+                        print("to server", msg)
+                        to_tracker = msg_encoder.msgToCodec12(msg, 'cmd')
+                        conn.sendall(to_tracker)
 
-                print(data)
-            sleep(10)
+                print("data to server",data)
+                print("----------------------------------------------")
+            sleep(5)
+
+    def loadTrackerInfo(self):
+        with open('trackerIds.json') as f:
+            data = json.load(f)
+        return data
+
 class test:
     def yolo(self):
         return yolo
