@@ -23,8 +23,7 @@ class postRequest():
         control = control['response']
         resp = control.get('outputs') or -1
         if( resp != -1):
-            print("okay?")
-            data = self.serverToTracker(control['outputs'])
+            data = self.serverToTracker(control['outputs'], raw_data['imei'])
             # print('digoutdata', data)
             return data
         
@@ -52,8 +51,8 @@ class postRequest():
                 "pir"        : io.get('Digital Input 2') or 0
             },
             "outputs":{
-                "led"   :io.get('Digital Output 1') or 0,
-                "buzzer":io.get('Digital Output 0') or 0
+                "output1"   :io.get('Digital Output 1') or 0,
+                "output2"   :io.get('Digital Output 2') or 0
             },
             "signal":{
                 "mSing": int(io.get('GSM Signal') or 0),
@@ -62,15 +61,15 @@ class postRequest():
         }
         return format
 
-    def serverToTracker(self, data):
+    def serverToTracker(self, data, imei):
         last_save = db.getTrackerOutputs(imei)
         temp=[]
         for i in data:
             if(i=='output1'):
-                last_save[0] = str(data[i]))
+                temp.append(str(data[i]))
             else:
                 temp.append(last_save[0])
-                
+
             if(i=='output2'):
                 temp.append(str(data[i]))
             else:
