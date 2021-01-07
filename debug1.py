@@ -1,8 +1,8 @@
-import binascii
-import libscrc
-import crc16
-import sys
-# a = "getinfo"
+# import binascii
+# import libscrc
+# import crc16
+# import sys
+# # a = "getinfo"
 # data = binascii.hexlify(a.encode('utf-8'))
 
 # orig = "676574696E666F"
@@ -25,8 +25,15 @@ import sys
 # print(crc16.to_bytes(4, byteorder='big').hex())
 
 
-data = int("676574696e666f", 16)
-print(data)
-aa = data.to_bytes(7, byteorder='big')
-print(aa)
-sys.stdout.buffer.write(aa)
+# data = int("676574696e666f", 16)
+# print(data)
+# aa = data.to_bytes(7, byteorder='big')
+# print(aa)
+# sys.stdout.buffer.write(aa)
+
+
+a = 2
+b='00'
+for i in range(a):
+    print(i)
+    print(b[i])
