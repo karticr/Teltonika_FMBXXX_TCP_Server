@@ -1,5 +1,6 @@
 import requests
 import json
+import traceback
 
 from avlMatcher import avlIdMatcher
 from database import mongoController
@@ -12,22 +13,28 @@ class postRequest():
         self.post_url = "https://api.skymarinealert.co.uk/boats/endpoint"
 
     def postToServer(self, raw_data):
-        io = avl_match.idToAvl(raw_data['io_data'])
-        print("io", io)
-        formatted_data = self.avlToPostData(raw_data, io)
-        # print("after format",formatted_data)
-        server_resp    = self.post(formatted_data)
-        control = server_resp.text
-        control = json.loads(control)
+        try:
+            io = avl_match.idToAvl(raw_data['io_data'])
+            print("io", io)
+            formatted_data = self.avlToPostData(raw_data, io)
+            # print("after format",formatted_data)
+            server_resp    = self.post(formatted_data)
+            control = server_resp.text
+            control = json.loads(control)
 
-        control = control['response']
-        resp = control.get('outputs') or -1
-        if( resp != -1):
-            data = self.serverToTracker(control['outputs'], raw_data['imei'])
-            # print('digoutdata', data)
-            return data
+            control = control['response']
+            resp = control.get('outputs') or -1
+            if( resp != -1):
+                data = self.serverToTracker(control['outputs'], raw_data['imei'])
+                # print('digoutdata', data)
+                return data
         
-        return -1
+            return -1
+        except Exception as e:
+            print(traceback.format_exc())
+            print(str(e))
+            return -1
+
 
     def post(self,data, url = None):
         url = url if url else self.post_url
