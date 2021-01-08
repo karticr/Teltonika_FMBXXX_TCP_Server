@@ -46,6 +46,9 @@ class postRequest():
             },
             "inputs":{
                 "temp1"      : (io.get('Dallas Temperature 1') or  0)/10,
+                "temp2"      : (io.get('Dallas Temperature 2') or  0)/10,
+                "temp3"      : (io.get('Dallas Temperature 3') or  0)/10,
+                "temp4"      : (io.get('Dallas Temperature 3') or  0)/10,
                 "bat_volt"   : (io.get('External Voltage') or 0)/1000,
                 "track_volt" : (io.get('Battery Voltage') or 0)/1000,
                 "pir"        : io.get('Digital Input 2') or 0
