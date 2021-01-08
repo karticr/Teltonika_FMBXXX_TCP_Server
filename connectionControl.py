@@ -48,7 +48,7 @@ class connControl:
                 # data = db.getTrackerOutputs(imei)
                 data = db.findTracker(imei)
                 app_server_resp = post_requester.postToServer(data)
-                print("----------------------------------------------")
+                # print("----------------------------------------------")
                 if(app_server_resp != -1):
                     t_info = self.trackers_info.get(imei) or -1
                     if(t_info == -1):
@@ -67,8 +67,8 @@ class connControl:
                         to_tracker = msg_encoder.msgToCodec12(msg, 'cmd')
                         conn.sendall(to_tracker)
 
-                print("data to server",data)
-                print("----------------------------------------------")
+                # print("data to server",data)
+                # print("----------------------------------------------")
             sleep(5)
 
     def loadTrackerInfo(self):
