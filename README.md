@@ -15,7 +15,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/karticr/Teltonika_FMBXXX_TCP_Server#getting-started">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -24,7 +24,7 @@
   <p align="center">
     Python based tcp server to recieve and control teltonika fmb devices
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/karticr/Teltonika_FMBXXX_TCP_Server#getting-started"><strong>Explore the docs »</strong></a>
     <br />
     <a href="https://github.com/karticr/Teltonika_FMBXXX_TCP_Server/issues">Report Bug</a>
     ·
