@@ -103,26 +103,17 @@ I have also programed and compiled diffrent programs and datasets that can be us
         <li>and you can forward the return result from the above function to the tracker by using conn on main.py and  </li>
     </ul>
 </li>
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
-
-
-
-
-
-
-
-
-
-
-
-
+<li>AvlDecoder decodes incoming codec 8 messages from the tracker into a dict with 
+    <ul>
+        <li>codec id<li>
+        <li>no of records (this has to be sent back to the tracker as an acknowledgement)<li>
+        <li>crc-16 (crc-16/IBM)<li>
+        <li>latitude, longitude, altitude, angle, no of satellites, speed<li>
+        <li>io data (the input output 1 wire and other sensor information)<li>
+    </ul>
+</li>
+<li>IO_decoder decodes the i/o information from the codec 18 message from the server</li>
+<li>avlMatcher converts the avl ids into understandable variables using the avlIds.json</li>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
