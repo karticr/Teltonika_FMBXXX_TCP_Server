@@ -44,7 +44,6 @@ class TCPServer():
                     vars = avl_decoder.decodeAVL(recieved)
                     vars['imei'] = imei.split("\x0f")[1]
                     print("vars", vars)
-                    post_requester.postToServer(vars)
                     resp = self.mResponse(vars['no_record_i'])
                     time.sleep(30)
                     conn.send(resp)
