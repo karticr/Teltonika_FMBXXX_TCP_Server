@@ -63,8 +63,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Teltonika FMBXXX server]]
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+Teltonika FMBXXX server
+This project is a basic server that gets data from the teltonica devices and prints them its a basic tcp server that can handle multiple clients. Documentation for building a ready made tcp server for controlling/ getting data out of the teltonica trackers was hard for me so i programmed this so that you could build your server off this.
+
+Communication is based on documentation from tthe teltonika wiki <a href="https://wiki.teltonika-sas.com/wikibase/index.php?title=Teltonika_data_sending/receiving_protocols&mobileaction=toggle_view_mobile">teltonika tcp protocols</a>
 
 Here's why:
 * Your time should be focused on creating something amazing. A project that solves a problem and helps others
