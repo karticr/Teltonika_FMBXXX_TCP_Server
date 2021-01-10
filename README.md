@@ -93,7 +93,6 @@ once the tracker is setup with the server ip and port with tcp communication on 
 ## Usage
 I have also programed and compiled diffrent programs and datasets that can be useful for your application
 <li>(<a href="https://github.com/karticr/Teltonika_FMBXXX_TCP_Server/blob/main/avlIds.json">Avl Ids</a>) is a json list of all the avl varable ids and what they mean</li>
-(<a href="https://github.com/karticr/Teltonika_FMBXXX_TCP_Server/blob/main/avlIds.json">Avl Ids</a>)
 <li>(<a href="https://github.com/karticr/Teltonika_FMBXXX_TCP_Server/blob/main/msgEncoder.py">msgEncode.py</a>) contains a class to encode messages into variouse differnt codecs that teltonica supports
     <ul>
         <li>msgToCodec12 is a function to convert messages into codec 12. codec 12 is used by the teltonica devices to accept sms/gprs commands</li>
