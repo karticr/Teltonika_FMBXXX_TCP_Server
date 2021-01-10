@@ -39,23 +39,11 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -105,11 +93,11 @@ I have also programed and compiled diffrent programs and datasets that can be us
 </li>
 <li>AvlDecoder decodes incoming codec 8 messages from the tracker into a dict with 
     <ul>
-        <li>codec id<li>
-        <li>no of records (this has to be sent back to the tracker as an acknowledgement)<li>
-        <li>crc-16 (crc-16/IBM)<li>
-        <li>latitude, longitude, altitude, angle, no of satellites, speed<li>
-        <li>io data (the input output 1 wire and other sensor information)<li>
+        <li>codec id</li>
+        <li>no of records (this has to be sent back to the tracker as an acknowledgement)</li>
+        <li>crc-16 (crc-16/IBM)</li>
+        <li>latitude, longitude, altitude, angle, no of satellites, speed</li>
+        <li>io data (the input output 1 wire and other sensor information)</li>
     </ul>
 </li>
 <li>IO_decoder decodes the i/o information from the codec 18 message from the server</li>
