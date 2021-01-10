@@ -47,8 +47,8 @@ class postRequest():
         format = {
             "deviceId": avl['imei'],
             "nmea": {
-                "lat" : str(avl['lat']/10000000),
-                "long": str(avl['lon']/10000000),
+                "lat" : float(avl['lat']/10000000),
+                "long": float(avl['lon']/10000000),
                 "speed"   : int(avl['speed'])
             },
             "inputs":{
