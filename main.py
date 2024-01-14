@@ -37,15 +37,19 @@ class TCPServer():
             try:
                 data = conn.recv(1024)
                 if(data):
+                    print('data',data)
                     vars         = {}
-                    recieved = self.decoder(data)
+                    recieved = self.decoder(data) # this just binascii hexlifyies the data
+                    print('\nreceived',recieved)
                     with open('raw.txt', 'a+') as w:
                         w.writelines(recieved.decode('utf-8')+'\n')
                     vars = avl_decoder.decodeAVL(recieved)
                     vars['imei'] = imei.split("\x0f")[1]
-                    print("vars", vars)
+                    print("vars", json.dumps(vars,indent=2))
+#                    print('vars[io_data]',vars['io_data'])
                     resp = self.mResponse(vars['no_record_i'])
-                    time.sleep(30)
+                    print('resp',resp)
+                    time.sleep(20)
                     conn.send(resp)
                     # conn.send(struct.pack("!L", vars['novars']))
                 else:
