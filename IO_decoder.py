@@ -5,6 +5,12 @@ class IODecoder():
         self.IO_data = ""
         self.Ns_data = {}
 
+        # These are the two most-supported Teltonika data sending protocols, Codec 8 and Codec 8E (8E hex = 142 decimal)
+        self.codec_options = {
+            142: {'id_size':2,'variable_length':True},   # 142 is decimal of 8E https://wiki.teltonika-gps.com/view/Codec#Codec_8_Extended
+            8:   {'id_size':1,'variable_length':False},  # Biggest difference between 8 and 8E is the length of the AVL IDs and the presence of variable-length values after the N8 Properties
+        }     
+        
     def ioVariableDecoderNX(self, NXs, n_NX): # No NX_size because the size of the value is determined by 2 bytes after each ID
         cursor = 0
         temp = {}
@@ -16,9 +22,9 @@ class IODecoder():
             temp[id]        = val
         return(temp)
     
-    def ioStaticDecoder(self, NPs, NPs_size, property,codecid,codec_options):
+    def ioStaticDecoder(self, NPs, NPs_size,property,codecid):
         temp = {}
-        id_size_b           = codec_options[codecid]['id_size'] * 2
+        id_size_b           = self.codec_options[codecid]['id_size'] * 2
         value_size_b        = property * 2
         idval_size          = id_size_b + value_size_b
         for i in range(0, NPs_size, idval_size):
@@ -30,32 +36,36 @@ class IODecoder():
                 pass
         return(temp)
 
-    def dataDecoder(self, n_data,codecid,codec_options): # n_data is the entire received data from 48 on. 0:48 constitutes the preamble, data field and codec (maybe also number of data 1?)
+    def dataDecoder(self, n_data,codecid): # n_data is the entire received data from 48 on. 0:48 constitutes the preamble, data field and codec (maybe also number of data 1?)
         Ns_data = {}
         properties          = [1,2,4,8]                 # These are the different byte sizes of IO values that can be present
         eventIO_ID          = int(n_data[0:4], 16)      # This is the IO ID that triggered the record (0 if scheduled)
         N_Tot_io            = int(n_data[4:8], 16)      # Total number of IOs in this AVL packet
         cursor              = 8                         # Cursor starts at 8 because 0:4 is the eventIO_ID and 4:8 is the total number of IO items
         counted_IOs         = 0
+
         for property in properties:
             n_NP            = int(n_data[cursor:cursor+4], 16)
-            NPs_size        = n_NP * ((codec_options[codecid]['id_size'] + property) * 2)  # Add the size of the ID and the size of the value, then multiply by the number of ID+value pairs in that property group to get the entire size
+            NPs_size        = n_NP * ((self.codec_options[codecid]['id_size'] + property) * 2)  # Add the size of the ID and the size of the value, then multiply by the number of ID+value pairs in that property group to get the entire size
             NPs             = n_data[4+cursor:4+cursor+NPs_size]
-            NP_data         = self.ioStaticDecoder(NPs, NPs_size, property,codecid,codec_options)
+            NP_data         = self.ioStaticDecoder(NPs, NPs_size, property,codecid)
             n_name          = 'n'+str(property)
             Ns_data[n_name] = NP_data   
-            counted_IOs     = n_NP
+            counted_IOs     = counted_IOs + n_NP
             cursor          = cursor + NPs_size + 4     # I still don't fully understand why I add an extra 4 here. That would mean I'm skipping over 2 bytes, right?
 
-        if codec_options[codecid]['variable_length'] == True:
+        if self.codec_options[codecid]['variable_length'] == True:
             n_NX            = int(n_data[cursor:cursor+4], 16)
             NXs             = n_data[cursor+4:-10]
             Ns_data['nX']   = self.ioVariableDecoderNX(NXs, n_NX)
-            counted_IOs     +=n_NX
+            counted_IOs     = counted_IOs + n_NX
 
-        print('Counted IOs == Expected?',N_Tot_io==counted_IOs,counted_IOs,N_Tot_io)
 
-        return(Ns_data)
+#        print('Counted IOs == Expected?',N_Tot_io==counted_IOs,counted_IOs,N_Tot_io)
+        merged_dict = {k: v for d in Ns_data.values() for k, v in d.items()} # A merged dicitonary of all AVL IDs and their values without the n1, n2, holding dictionaries
+#        print('merged_dict',merged_dict)
+#        return(Ns_data)
+        return(merged_dict)
 
         '''
         try:

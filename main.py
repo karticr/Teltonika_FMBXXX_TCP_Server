@@ -10,6 +10,7 @@ import traceback
 
 from avlDecoder import avlDecoder
 from apiControl import postRequest
+from dbConnection import writerecord
 
 avl_decoder    = avlDecoder()
 post_requester = postRequest()
@@ -20,7 +21,10 @@ class TCPServer():
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         self.sock.bind(('', self.port))
-
+        self.avlids = {}
+        with open('avlIds.json','r') as infile:
+            self.avlids.update(json.load(infile))
+        
     def tcpServer(self):
         self.sock.listen()
         while True:
@@ -37,17 +41,18 @@ class TCPServer():
             try:
                 data = conn.recv(1024)
                 if(data):
-                    print('data',data)
+#                    print('data',data)
                     vars         = {}
                     recieved = self.decoder(data) # this just binascii hexlifyies the data
                     print('\nreceived',recieved)
                     with open('raw.txt', 'a+') as w:
                         w.writelines(recieved.decode('utf-8')+'\n')
-                    vars = avl_decoder.decodeAVL(recieved)
+                    vars = avl_decoder.decodeAVL(recieved,self.avlids)
                     vars['imei'] = imei.split("\x0f")[1]
                     print("vars", json.dumps(vars,indent=2))
 #                    print('vars[io_data]',vars['io_data'])
                     resp = self.mResponse(vars['no_record_i'])
+                    writerecord(vars)
                     print('resp',resp)
                     time.sleep(20)
                     conn.send(resp)
